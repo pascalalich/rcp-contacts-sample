@@ -5,3 +5,5 @@ Bundle-SymbolicName: com.zuehlke.contacts.service.api
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Zühlke
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.zuehlke.contacts.service,
+ com.zuehlke.contacts.service.dto

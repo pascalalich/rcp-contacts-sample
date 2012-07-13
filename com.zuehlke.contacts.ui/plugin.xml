@@ -5,15 +5,17 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Sample Views"
+            name="Contacts"
             id="com.zuehlke.contacts.ui">
       </category>
       <view
-            name="Sample View"
-            icon="icons/sample.gif"
+            allowMultiple="false"
             category="com.zuehlke.contacts.ui"
-            class="com.zuehlke.contacts.ui.views.SampleView"
-            id="com.zuehlke.contacts.ui.views.SampleView">
+            class="com.zuehlke.contacts.ui.view.CustomerListView"
+            icon="icons/customers_view.gif"
+            id="com.zuehlke.contacts.ui.customerlist"
+            name="Customers"
+            restorable="false">
       </view>
    </extension>
    <extension
@@ -21,13 +23,58 @@
       <perspectiveExtension
             targetID="com.zuehlke.contacts.perspective">
          <view
-               id="com.zuehlke.contacts.ui.views.SampleView"
+               closeable="false"
+               id="com.zuehlke.contacts.ui.customerlist"
                minimized="false"
                ratio="0.2"
                relationship="left"
-               relative="org.eclipse.ui.editorss">
+               relative="org.eclipse.ui.editorss"
+               showTitle="false">
          </view>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.zuehlke.contacts.ui.customerlist">
+         <command
+               commandId="com.zuehlke.contacts.ui.customeredit"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <and>
+                     <iterate
+                           ifEmpty="false"
+                           operator="and">
+                        <instanceof
+                              value="com.zuehlke.contacts.service.dto.Customer">
+                        </instanceof>
+                     </iterate>
+                     <count
+                           value="1">
+                     </count>
+                  </and>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.zuehlke.contacts.ui.customeredit"
+            name="Edit Customer">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.zuehlke.contacts.ui.handler.CustomerEditHandler"
+            commandId="com.zuehlke.contacts.ui.customeredit">
+      </handler>
    </extension>
 
 </plugin>
