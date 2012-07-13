@@ -16,5 +16,18 @@
             id="com.zuehlke.contacts.ui.views.SampleView">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.zuehlke.contacts.perspective">
+         <view
+               id="com.zuehlke.contacts.ui.views.SampleView"
+               minimized="false"
+               ratio="0.2"
+               relationship="left"
+               relative="org.eclipse.ui.editorss">
+         </view>
+      </perspectiveExtension>
+   </extension>
 
 </plugin>

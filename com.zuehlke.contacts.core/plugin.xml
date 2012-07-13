@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="com.zuehlke.contacts.core.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="Contacts Perspective"
+            class="com.zuehlke.contacts.core.Perspective"
+            id="com.zuehlke.contacts.perspective">
+      </perspective>
+   </extension>
+
+</plugin>
