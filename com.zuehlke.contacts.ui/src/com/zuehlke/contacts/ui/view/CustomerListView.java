@@ -37,7 +37,7 @@ public class CustomerListView extends ViewPart {
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
 		treeViewerContacts = new TreeViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
 		Tree tree = treeViewerContacts.getTree();
-		tree.setLinesVisible(true);
+		tree.setLinesVisible(false);
 
 		// set providers
 		treeViewerContacts.setLabelProvider(new ContactTreeLabelProvider());

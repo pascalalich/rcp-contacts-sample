@@ -12,7 +12,7 @@
             allowMultiple="false"
             category="com.zuehlke.contacts.ui"
             class="com.zuehlke.contacts.ui.view.CustomerListView"
-            icon="icons/customers_view.gif"
+            icon="icons/customers.gif"
             id="com.zuehlke.contacts.ui.customerlist"
             name="Customers"
             restorable="false">

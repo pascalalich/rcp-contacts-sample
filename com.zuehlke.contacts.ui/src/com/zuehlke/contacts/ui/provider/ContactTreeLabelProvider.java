@@ -1,9 +1,11 @@
 package com.zuehlke.contacts.ui.provider;
 
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.graphics.Image;
 
 import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
+import com.zuehlke.contacts.ui.Activator;
 
 public class ContactTreeLabelProvider extends LabelProvider {
 
@@ -17,5 +19,16 @@ public class ContactTreeLabelProvider extends LabelProvider {
 			return customer.getName() + " (" + customer.getNumber() + ")";
 		}
 		return "";
+	}
+
+	@Override
+	public Image getImage(Object element) {
+		Image image = null;
+		if (element instanceof Contact) {
+			image = Activator.getDefault().getImage("contact");
+		} else if (element instanceof Customer) {
+			image = Activator.getDefault().getImage("customer");
+		}
+		return image;
 	}
 }
