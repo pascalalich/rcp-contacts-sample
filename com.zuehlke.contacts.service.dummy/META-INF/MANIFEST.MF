@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dummy Service
+Bundle-SymbolicName: com.zuehlke.contacts.service.dummy
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.zuehlke.contacts.service.dummy.Activator
+Bundle-Vendor: Zühlke
+Require-Bundle: org.eclipse.core.runtime,
+ com.zuehlke.contacts.service.api
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
