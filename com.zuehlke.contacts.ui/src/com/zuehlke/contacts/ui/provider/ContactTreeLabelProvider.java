@@ -1,5 +1,6 @@
 package com.zuehlke.contacts.ui.provider;
 
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
@@ -24,10 +25,11 @@ public class ContactTreeLabelProvider extends LabelProvider {
 	@Override
 	public Image getImage(Object element) {
 		Image image = null;
+		ImageRegistry imageRegistry = Activator.getDefault().getImageRegistry();
 		if (element instanceof Contact) {
-			image = Activator.getDefault().getImage("contact");
+			image = imageRegistry.get("contact");
 		} else if (element instanceof Customer) {
-			image = Activator.getDefault().getImage("customer");
+			image = imageRegistry.get("customer");
 		}
 		return image;
 	}

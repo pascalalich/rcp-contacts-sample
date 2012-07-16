@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -28,6 +27,9 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		registerImages();
@@ -41,18 +43,8 @@ public class Activator extends AbstractUIPlugin {
 				getImageDescriptor("/icons/contact.gif"));
 	}
 
-	public Image getImage(String key) {
-		return getImageRegistry().get(key);
-	}
-
-
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
+	/**
+	 * {@inheritDoc}
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;

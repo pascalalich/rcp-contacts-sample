@@ -76,5 +76,14 @@
             commandId="com.zuehlke.contacts.ui.customeredit">
       </handler>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.zuehlke.contacts.ui.editor.CustomerEditor"
+            default="false"
+            id="com.zuehlke.contacts.ui.editor.customer"
+            name="Customer Editor">
+      </editor>
+   </extension>
 
 </plugin>
