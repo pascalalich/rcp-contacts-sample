@@ -10,6 +10,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import com.zuehlke.contacts.service.dto.Customer;
+
 public class CustomerFormPage extends FormPage {
 
 	public CustomerFormPage(FormEditor editor) {
@@ -32,11 +34,18 @@ public class CustomerFormPage extends FormPage {
 		layout = new GridLayout();
 		layout.numColumns = 2;
 		client.setLayout(layout);
-		toolkit.createLabel(client, "Hallo");
+		toolkit.createLabel(client, "Name");
+		toolkit.createText(client, getCustomer().getName());
+		toolkit.createLabel(client, "Number");
+		toolkit.createText(client, getCustomer().getNumber());
 		section.setText("General");
-		// section.setClient(client);
+		section.setClient(client);
 		section.setExpanded(true);
 
+	}
+
+	private Customer getCustomer() {
+		return ((CustomerEditorInput) getEditorInput()).getCustomer();
 	}
 
 }
