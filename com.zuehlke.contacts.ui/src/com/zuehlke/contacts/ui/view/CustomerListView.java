@@ -11,6 +11,8 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -42,6 +44,12 @@ public class CustomerListView extends ViewPart {
 		// set providers
 		treeViewerContacts.setLabelProvider(new ContactTreeLabelProvider());
 		treeViewerContacts.setContentProvider(new ContactTreeContentProvider());
+		treeViewerContacts.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				// TODO open editor
+			}
+		});
 		// register menus & selection provider
 		registerContextMenu();
 		getViewSite().setSelectionProvider(treeViewerContacts);
