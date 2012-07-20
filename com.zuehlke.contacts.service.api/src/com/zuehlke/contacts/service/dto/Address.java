@@ -3,7 +3,7 @@ package com.zuehlke.contacts.service.dto;
 /**
  * Address type
  */
-public class Address {
+public class Address extends BasicDto {
 
 	private String street;
 
@@ -20,7 +20,7 @@ public class Address {
 	}
 
 	public void setStreet(String street) {
-		this.street = street;
+		firePropertyChange("street", this.street, this.street = street);
 	}
 
 	public String getStreetNumber() {
@@ -28,7 +28,8 @@ public class Address {
 	}
 
 	public void setStreetNumber(String streetNumber) {
-		this.streetNumber = streetNumber;
+		firePropertyChange("streetNumber", this.streetNumber,
+				this.streetNumber = streetNumber);
 	}
 
 	public String getPostalCode() {
@@ -36,7 +37,8 @@ public class Address {
 	}
 
 	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+		firePropertyChange("postalCode", this.postalCode,
+				this.postalCode = postalCode);
 	}
 
 	public String getCity() {
@@ -44,7 +46,8 @@ public class Address {
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		firePropertyChange("city", this.city, this.city = city);
+
 	}
 
 	public String getCountry() {
@@ -52,7 +55,7 @@ public class Address {
 	}
 
 	public void setCountry(String country) {
-		this.country = country;
+		firePropertyChange("country", this.country, this.country = country);
 	}
 
 }

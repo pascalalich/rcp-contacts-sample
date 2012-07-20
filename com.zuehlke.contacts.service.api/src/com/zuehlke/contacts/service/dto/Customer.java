@@ -1,6 +1,6 @@
 package com.zuehlke.contacts.service.dto;
 
-public class Customer {
+public class Customer extends BasicDto {
 
 	/**
 	 * Technical id
@@ -24,7 +24,7 @@ public class Customer {
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		firePropertyChange("id", this.id, this.id = id);
 	}
 
 	public String getNumber() {
@@ -32,7 +32,7 @@ public class Customer {
 	}
 
 	public void setNumber(String number) {
-		this.number = number;
+		firePropertyChange("number", this.number, this.number = number);
 	}
 
 	public String getName() {
@@ -40,7 +40,7 @@ public class Customer {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		firePropertyChange("name", this.name, this.name = name);
 	}
 
 	public Long getMainContact() {
@@ -48,7 +48,8 @@ public class Customer {
 	}
 
 	public void setMainContact(Long mainContact) {
-		this.mainContact = mainContact;
+		firePropertyChange("mainContact", this.mainContact,
+				this.mainContact = mainContact);
 	}
 
 }
