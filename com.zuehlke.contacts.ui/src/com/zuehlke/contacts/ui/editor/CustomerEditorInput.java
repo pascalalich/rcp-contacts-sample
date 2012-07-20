@@ -5,7 +5,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
 import com.zuehlke.contacts.service.dto.Customer;
-import com.zuehlke.contacts.ui.Activator;
 
 public class CustomerEditorInput implements IEditorInput {
 
@@ -26,8 +25,7 @@ public class CustomerEditorInput implements IEditorInput {
 
 	@Override
 	public ImageDescriptor getImageDescriptor() {
-		return Activator.getDefault().getImageRegistry()
-				.getDescriptor("customer");
+		return null;
 	}
 
 	@Override

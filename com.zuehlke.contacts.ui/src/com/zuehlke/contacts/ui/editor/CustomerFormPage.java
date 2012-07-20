@@ -1,8 +1,10 @@
 package com.zuehlke.contacts.ui.editor;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
@@ -26,21 +28,28 @@ public class CustomerFormPage extends FormPage {
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 1;
 		form.getBody().setLayout(layout);
-
-		Section section = toolkit.createSection(form.getBody(), Section.TWISTIE
-				| Section.DESCRIPTION);
+		Section section = toolkit.createSection(form.getBody(),
+				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
+						| Section.EXPANDED);
+		section.setText("General Information");
+		section.setDescription("This section describes general information about this customer");
+		section.setExpanded(true);
+		section.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
 		layout = new GridLayout();
 		layout.numColumns = 2;
 		client.setLayout(layout);
 		toolkit.createLabel(client, "Name");
-		toolkit.createText(client, getCustomer().getName());
+		Text nameText = toolkit.createText(client, getCustomer().getName());
+		nameText.setLayoutData(new GridData(200, SWT.DEFAULT));
 		toolkit.createLabel(client, "Number");
-		toolkit.createText(client, getCustomer().getNumber());
-		section.setText("General");
+		Text numberText = toolkit.createText(client, getCustomer().getNumber());
+		numberText.setLayoutData(new GridData(200, SWT.DEFAULT));
+		toolkit.createLabel(client, "Main contact");
+		Text mainContactText = toolkit.createText(client, "");
+		mainContactText.setLayoutData(new GridData(200, SWT.DEFAULT));
 		section.setClient(client);
-		section.setExpanded(true);
 
 	}
 

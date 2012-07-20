@@ -1,8 +1,11 @@
 package com.zuehlke.contacts.ui.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
+
+import com.zuehlke.contacts.ui.Activator;
 
 public class CustomerEditor extends FormEditor {
 
@@ -29,5 +32,10 @@ public class CustomerEditor extends FormEditor {
 	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
+	}
+
+	@Override
+	public Image getTitleImage() {
+		return Activator.getDefault().getImageRegistry().get("customer");
 	}
 }
