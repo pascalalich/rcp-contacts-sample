@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Skype Intent
+Bundle-SymbolicName: com.zuehlke.contacts.ui.intent.skype
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.zuehlke.contacts.ui.intent.skype.Activator
+Bundle-Vendor: Zühlke
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
