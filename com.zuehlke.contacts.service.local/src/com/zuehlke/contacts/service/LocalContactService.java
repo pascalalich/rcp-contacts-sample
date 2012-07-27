@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.service.dummy.internal;
+package com.zuehlke.contacts.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.Collection;
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.dto.Contact;
 
-public class DummyContactService implements ContactService {
+public class LocalContactService implements ContactService {
 
 	@Override
 	public void update(Contact contact) {

@@ -1,12 +1,10 @@
-package com.zuehlke.contacts.service.dummy;
+package com.zuehlke.contacts.service;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.CustomerService;
-import com.zuehlke.contacts.service.dummy.internal.DummyContactService;
-import com.zuehlke.contacts.service.dummy.internal.DummyCustomerService;
 
 public class Activator implements BundleActivator {
 
@@ -40,9 +38,9 @@ public class Activator implements BundleActivator {
 
 	private void registerDummyServices() {
 		context.registerService(CustomerService.class,
-				new DummyCustomerService(), null);
+				new LocalCustomerService(), null);
 		context.registerService(ContactService.class,
-				new DummyContactService(), null);
+				new LocalContactService(), null);
 	}
 
 }

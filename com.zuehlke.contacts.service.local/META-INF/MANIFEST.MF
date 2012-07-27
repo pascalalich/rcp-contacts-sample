@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dummy Service
-Bundle-SymbolicName: com.zuehlke.contacts.service.dummy
+Bundle-SymbolicName: com.zuehlke.contacts.service.local
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.zuehlke.contacts.service.dummy.Activator
+Bundle-Activator: com.zuehlke.contacts.service.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.core.runtime,
  com.zuehlke.contacts.service.api
