@@ -1,17 +1,14 @@
 package com.zuehlke.contacts.service;
 
-import org.osgi.framework.BundleActivator;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import com.zuehlke.contacts.service.ContactService;
-import com.zuehlke.contacts.service.CustomerService;
+public class Activator extends Plugin {
 
-public class Activator implements BundleActivator {
+	private static Activator instance;
 
-	private static BundleContext context;
-
-	static BundleContext getContext() {
-		return context;
+	public static Activator getDefault() {
+		return instance;
 	}
 
 	/*
@@ -22,7 +19,8 @@ public class Activator implements BundleActivator {
 	 * )
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
+		super.start(bundleContext);
+		instance = this;
 		registerDummyServices();
 	}
 
@@ -33,13 +31,14 @@ public class Activator implements BundleActivator {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		instance = null;
+		super.stop(bundleContext);
 	}
 
 	private void registerDummyServices() {
-		context.registerService(CustomerService.class,
+		getBundle().getBundleContext().registerService(CustomerService.class,
 				new LocalCustomerService(), null);
-		context.registerService(ContactService.class,
+		getBundle().getBundleContext().registerService(ContactService.class,
 				new LocalContactService(), null);
 	}
 

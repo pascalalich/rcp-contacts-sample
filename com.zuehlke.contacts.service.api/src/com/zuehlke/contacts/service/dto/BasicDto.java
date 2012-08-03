@@ -5,7 +5,7 @@ import java.beans.PropertyChangeSupport;
 
 public abstract class BasicDto {
 
-	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(
+	private transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(
 			this);
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
