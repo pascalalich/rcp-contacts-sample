@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Outlook Intent
+Bundle-SymbolicName: com.zuehlke.contacts.ui.intent.outlook
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Zühlke
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
