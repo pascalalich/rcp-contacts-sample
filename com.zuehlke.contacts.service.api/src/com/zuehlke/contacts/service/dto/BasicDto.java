@@ -8,6 +8,16 @@ public abstract class BasicDto {
 	private transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(
 			this);
 
+	/**
+	 * Invoke after XML deserialization to initialize property change support.
+	 * TODO differently?
+	 */
+	public final void initChangeSupport() {
+		if (changeSupport == null) {
+			changeSupport = new PropertyChangeSupport(this);
+		}
+	}
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		changeSupport.addPropertyChangeListener(listener);
 	}

@@ -9,12 +9,13 @@ import com.zuehlke.contacts.ui.Activator;
 
 public class CustomerEditor extends FormEditor {
 
-	private CustomerEditorInput input;
+	private CustomerFormPage page;
 
 	@Override
 	protected void addPages() {
 		try {
-			addPage(new CustomerFormPage(this));
+			page = new CustomerFormPage(this);
+			addPage(page);
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
 		}
@@ -22,7 +23,7 @@ public class CustomerEditor extends FormEditor {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-
+		page.doSave(monitor);
 	}
 
 	@Override

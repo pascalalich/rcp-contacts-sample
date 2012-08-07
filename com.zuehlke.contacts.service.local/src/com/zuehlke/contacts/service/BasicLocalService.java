@@ -14,8 +14,9 @@ import org.eclipse.core.runtime.Path;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.zuehlke.contacts.service.dto.BasicDto;
 
-public abstract class BasicLocalService<T> {
+public abstract class BasicLocalService<T extends BasicDto> {
 	/** The private map of contacts. */
 	private final Map<Long, T> data = new ConcurrentHashMap<Long, T>();
 
@@ -33,7 +34,7 @@ public abstract class BasicLocalService<T> {
 
 	public void update(T t) {
 		if (data.containsKey(getId(t))) {
-			copy(t, findById(getId(t)));
+			copy(t, data.get(getId(t)));
 			persist();
 		} else {
 			throw new RuntimeException("object with id " + getId(t)
@@ -105,8 +106,12 @@ public abstract class BasicLocalService<T> {
 		File file = Activator.getDefault().getStateLocation()
 				.append(new Path(getDataFileName())).toFile();
 		if (file.exists()) {
-			data.addAll((Collection<T>) new XStream(new DomDriver("UTF-8"))
-					.fromXML(file));
+			Collection<T> xmlData = (Collection<T>) new XStream(new DomDriver(
+					"UTF-8")).fromXML(file);
+			for (T xmlDataEntry : xmlData) {
+				xmlDataEntry.initChangeSupport();
+			}
+			data.addAll(xmlData);
 		} else {
 			data.addAll(getInitialData());
 		}

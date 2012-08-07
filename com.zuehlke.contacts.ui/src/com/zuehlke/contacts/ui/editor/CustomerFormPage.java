@@ -1,5 +1,6 @@
 package com.zuehlke.contacts.ui.editor;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -13,7 +14,9 @@ import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
+import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
+import com.zuehlke.contacts.ui.Activator;
 
 public class CustomerFormPage extends FormPage {
 
@@ -39,7 +42,6 @@ public class CustomerFormPage extends FormPage {
 
 		initDefaults();
 		initDirtyListeners();
-
 	}
 
 	private Section createSection(FormToolkit toolkit, Composite formBody) {
@@ -83,8 +85,7 @@ public class CustomerFormPage extends FormPage {
 		ModifyListener listener = new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				dirty = true;
-				getEditor().editorDirtyStateChanged();
+				setDirty(true);
 			}
 		};
 		nameText.addModifyListener(listener);
@@ -101,4 +102,44 @@ public class CustomerFormPage extends FormPage {
 		return dirty;
 	}
 
+	private void setDirty(boolean dirty) {
+		if (this.dirty != dirty) {
+			this.dirty = dirty;
+			getEditor().editorDirtyStateChanged();
+		}
+	}
+
+	@Override
+	public void doSave(IProgressMonitor monitor) {
+		super.doSave(monitor);
+		CustomerService customerService = Activator.getDefault().getService(
+				CustomerService.class);
+		if (customerService != null) {
+			updateModel();
+			Customer customer = getCustomer();
+			if (customer.getId() == null) {
+				customerService.create(customer);
+			} else {
+				customerService.update(customer);
+			}
+			setDirty(false);
+			// TODO send event to refresh view
+		} else {
+			// TODO error handling
+			throw new RuntimeException("Customer could not be saved: "
+					+ getCustomer().getId());
+		}
+	}
+
+	private void updateModel() {
+		Customer customer = getCustomer();
+		customer.setName(nameText.getText());
+		customer.setNumber(numberText.getText());
+		Long mainContact = null;
+		String mainContactId = mainContactText.getText().trim();
+		if (!mainContactId.isEmpty()) {
+			mainContact = Long.parseLong(mainContactId);
+		}
+		customer.setMainContact(mainContact);
+	}
 }
