@@ -9,12 +9,15 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import com.zuehlke.contacts.service.dto.Customer;
 
 public class CustomerFormPage extends FormPage {
+
+	private Text nameText;
+	private Text numberText;
+	private Text mainContactText;
 
 	public CustomerFormPage(FormEditor editor) {
 		super(editor, CustomerFormPage.class.getName(), "Customer");
@@ -24,33 +27,50 @@ public class CustomerFormPage extends FormPage {
 	protected void createFormContent(IManagedForm managedForm) {
 
 		FormToolkit toolkit = managedForm.getToolkit();
-		ScrolledForm form = managedForm.getForm();
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 1;
-		form.getBody().setLayout(layout);
-		Section section = toolkit.createSection(form.getBody(),
-				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-						| Section.EXPANDED);
+		Composite formBody = managedForm.getForm().getBody();
+		formBody.setLayout(new GridLayout(1, false));
+
+		Section section = createSection(toolkit, formBody);
+		createClient(toolkit, section);
+
+		initDefaults();
+	}
+
+	private Section createSection(FormToolkit toolkit, Composite formBody) {
+		Section section = toolkit.createSection(formBody, Section.DESCRIPTION
+				| Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
 		section.setText("General Information");
 		section.setDescription("This section describes general information about this customer");
 		section.setExpanded(true);
 		section.setLayoutData(new GridData(GridData.FILL_BOTH));
 
+		return section;
+	}
+
+	private void createClient(FormToolkit toolkit, Section section) {
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
-		layout = new GridLayout();
-		layout.numColumns = 2;
-		client.setLayout(layout);
+		client.setLayout(new GridLayout(2, false));
 		toolkit.createLabel(client, "Name");
-		Text nameText = toolkit.createText(client, getCustomer().getName());
+		nameText = toolkit.createText(client, "");
 		nameText.setLayoutData(new GridData(200, SWT.DEFAULT));
 		toolkit.createLabel(client, "Number");
-		Text numberText = toolkit.createText(client, getCustomer().getNumber());
+		numberText = toolkit.createText(client, "");
 		numberText.setLayoutData(new GridData(200, SWT.DEFAULT));
 		toolkit.createLabel(client, "Main contact");
-		Text mainContactText = toolkit.createText(client, "");
+		// TODO better main contact editing
+		mainContactText = toolkit.createText(client, "");
 		mainContactText.setLayoutData(new GridData(200, SWT.DEFAULT));
 		section.setClient(client);
+	}
 
+	private void initDefaults() {
+		Customer customer = getCustomer();
+		nameText.setText(customer.getName());
+		numberText.setText(customer.getNumber());
+		Long mainContact = customer.getMainContact();
+		if (mainContact != null) {
+			mainContactText.setText(mainContact.toString());
+		}
 	}
 
 	private Customer getCustomer() {
