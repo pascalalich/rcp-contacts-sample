@@ -1,6 +1,8 @@
 package com.zuehlke.contacts.ui.editor;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -19,6 +21,8 @@ public class CustomerFormPage extends FormPage {
 	private Text numberText;
 	private Text mainContactText;
 
+	private boolean dirty;
+
 	public CustomerFormPage(FormEditor editor) {
 		super(editor, CustomerFormPage.class.getName(), "Customer");
 	}
@@ -34,6 +38,8 @@ public class CustomerFormPage extends FormPage {
 		createClient(toolkit, section);
 
 		initDefaults();
+		initDirtyListeners();
+
 	}
 
 	private Section createSection(FormToolkit toolkit, Composite formBody) {
@@ -73,8 +79,26 @@ public class CustomerFormPage extends FormPage {
 		}
 	}
 
+	private void initDirtyListeners() {
+		ModifyListener listener = new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				dirty = true;
+				getEditor().editorDirtyStateChanged();
+			}
+		};
+		nameText.addModifyListener(listener);
+		numberText.addModifyListener(listener);
+		mainContactText.addModifyListener(listener);
+	}
+
 	private Customer getCustomer() {
 		return ((CustomerEditorInput) getEditorInput()).getCustomer();
+	}
+
+	@Override
+	public boolean isDirty() {
+		return dirty;
 	}
 
 }
