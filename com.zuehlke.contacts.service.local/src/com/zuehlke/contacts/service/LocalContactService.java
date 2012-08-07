@@ -54,21 +54,21 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 	protected Collection<Contact> getInitialData() {
 		Collection<Contact> contacts = new ArrayList<Contact>();
 		Contact contact1 = new Contact();
-		contact1.setId(2l);
-		contact1.setCustomer(2l);
+		contact1.setId(1l);
+		contact1.setCustomer(1l);
 		contact1.setGiven("Pascal");
 		contact1.setName("Alich");
 		contact1.setEmail("alp@zuehlke.com");
 		contacts.add(contact1);
 		Contact contact2 = new Contact();
-		contact2.setId(1l);
+		contact2.setId(2l);
 		contact2.setCustomer(1l);
 		contact2.setGiven("Stefan");
 		contact2.setName("Reichert");
 		contact2.setEmail("srt@zuehlke.com");
 		contacts.add(contact2);
 		Contact contact3 = new Contact();
-		contact3.setId(2l);
+		contact3.setId(3l);
 		contact3.setCustomer(2l);
 		contact3.setGiven("Max");
 		contact3.setName("Marke");
