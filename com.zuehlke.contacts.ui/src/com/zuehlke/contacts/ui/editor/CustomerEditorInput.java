@@ -53,8 +53,9 @@ public class CustomerEditorInput implements IEditorInput {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
-		// TODO Auto-generated method stub
+		// no adaptability
 		return null;
 	}
 }
