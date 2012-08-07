@@ -68,15 +68,18 @@ public class Activator extends AbstractUIPlugin {
 	@SuppressWarnings("unchecked")
 	public <T> T getService(Class<T> serviceClass) {
 		String serviceName = serviceClass.getName();
+		BundleContext bundleContext = getBundle().getBundleContext();
+		ServiceReference<T> serviceReference = null;
 		if (!serviceReferenceMap.containsKey(serviceName)) {
-			ServiceReference<T> serviceReference = getBundle()
-					.getBundleContext().getServiceReference(serviceClass);
+			serviceReference = bundleContext.getServiceReference(serviceClass);
 			if (serviceReference != null) {
 				serviceReferenceMap.put(serviceName, serviceReference);
 			}
+		} else {
+			serviceReference = (ServiceReference<T>) serviceReferenceMap
+					.get(serviceName);
 		}
-		return (T) getBundle().getBundleContext().getService(
-				serviceReferenceMap.get(serviceName));
+		return bundleContext.getService(serviceReference);
 	}
 
 	/**
