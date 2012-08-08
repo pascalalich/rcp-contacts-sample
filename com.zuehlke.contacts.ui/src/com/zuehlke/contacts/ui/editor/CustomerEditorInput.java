@@ -1,61 +1,33 @@
 package com.zuehlke.contacts.ui.editor;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IPersistableElement;
-
 import com.zuehlke.contacts.service.dto.Customer;
 
-public class CustomerEditorInput implements IEditorInput {
-
-	private Customer customer;
+public class CustomerEditorInput extends BasicEditorInput<Customer> {
 
 	public CustomerEditorInput(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	@Override
-	public boolean exists() {
-		return true;
-	}
-
-	@Override
-	public ImageDescriptor getImageDescriptor() {
-		return null;
+		super(customer);
 	}
 
 	@Override
 	public String getName() {
-		if (customer.getName() != null) {
-			return customer.getName();
+		Customer customer = getObject();
+		StringBuilder text = new StringBuilder();
+		if (customer.getId() != null) {
+			text.append(customer.getName());
+		} else {
+			text.append("New customer");
 		}
-		return "New customer";
+		return text.toString();
 	}
 
 	@Override
 	public String getToolTipText() {
-		String text = null;
-		if (customer.getName() != null) {
-			text = customer.getName() + " (" + customer.getNumber() + ")";
-		} else {
-			text = "New customer";
+		Customer customer = getObject();
+		StringBuilder text = new StringBuilder();
+		text.append(getName());
+		if (customer.getId() != null) {
+			text.append(" (").append(customer.getNumber()).append(")");
 		}
-		return text;
-	}
-
-	@Override
-	public IPersistableElement getPersistable() {
-		return null;
-	}
-
-	@Override
-	@SuppressWarnings("rawtypes")
-	public Object getAdapter(Class adapter) {
-		// no adaptability
-		return null;
+		return text.toString();
 	}
 }

@@ -2,7 +2,6 @@ package com.zuehlke.contacts.ui.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -10,7 +9,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
-import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
@@ -18,13 +16,11 @@ import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
 import com.zuehlke.contacts.ui.Activator;
 
-public class CustomerFormPage extends FormPage {
+public class CustomerFormPage extends BasicFormPage<Customer> {
 
 	private Text nameText;
 	private Text numberText;
 	private Text mainContactText;
-
-	private boolean dirty;
 
 	public CustomerFormPage(FormEditor editor) {
 		super(editor, CustomerFormPage.class.getName(), "Customer");
@@ -32,7 +28,6 @@ public class CustomerFormPage extends FormPage {
 
 	@Override
 	protected void createFormContent(IManagedForm managedForm) {
-
 		FormToolkit toolkit = managedForm.getToolkit();
 		Composite formBody = managedForm.getForm().getBody();
 		formBody.setLayout(new GridLayout(1, false));
@@ -72,7 +67,7 @@ public class CustomerFormPage extends FormPage {
 	}
 
 	private void initDefaults() {
-		Customer customer = getCustomer();
+		Customer customer = getObject();
 		nameText.setText(customer.getName());
 		numberText.setText(customer.getNumber());
 		Long mainContact = customer.getMainContact();
@@ -82,31 +77,10 @@ public class CustomerFormPage extends FormPage {
 	}
 
 	private void initDirtyListeners() {
-		ModifyListener listener = new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				setDirty(true);
-			}
-		};
+		ModifyListener listener = getDirtyListener();
 		nameText.addModifyListener(listener);
 		numberText.addModifyListener(listener);
 		mainContactText.addModifyListener(listener);
-	}
-
-	private Customer getCustomer() {
-		return ((CustomerEditorInput) getEditorInput()).getCustomer();
-	}
-
-	@Override
-	public boolean isDirty() {
-		return dirty;
-	}
-
-	private void setDirty(boolean dirty) {
-		if (this.dirty != dirty) {
-			this.dirty = dirty;
-			getEditor().editorDirtyStateChanged();
-		}
 	}
 
 	@Override
@@ -116,7 +90,7 @@ public class CustomerFormPage extends FormPage {
 				CustomerService.class);
 		if (customerService != null) {
 			updateModel();
-			Customer customer = getCustomer();
+			Customer customer = getObject();
 			if (customer.getId() == null) {
 				customerService.create(customer);
 			} else {
@@ -127,12 +101,12 @@ public class CustomerFormPage extends FormPage {
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Customer could not be saved: "
-					+ getCustomer().getId());
+					+ getObject().getId());
 		}
 	}
 
 	private void updateModel() {
-		Customer customer = getCustomer();
+		Customer customer = getObject();
 		customer.setName(nameText.getText());
 		customer.setNumber(numberText.getText());
 		Long mainContact = null;

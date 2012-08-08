@@ -84,6 +84,12 @@
             id="com.zuehlke.contacts.ui.editor.customer"
             name="Customer Editor">
       </editor>
+      <editor
+            class="com.zuehlke.contacts.ui.editor.ContactEditor"
+            default="false"
+            id="com.zuehlke.contacts.ui.editor.contact"
+            name="Contact Editor">
+      </editor>
    </extension>
 
 </plugin>

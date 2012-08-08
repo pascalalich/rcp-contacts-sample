@@ -3,7 +3,7 @@ package com.zuehlke.contacts.ui.editor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.PartInitException;
 
-public class CustomerEditor extends BasicFormEditor {
+public class ContactEditor extends BasicFormEditor {
 
 	private CustomerFormPage page;
 
@@ -24,6 +24,7 @@ public class CustomerEditor extends BasicFormEditor {
 
 	@Override
 	protected String getTitleImageKey() {
-		return "customer";
+		return "contact";
 	}
+
 }
