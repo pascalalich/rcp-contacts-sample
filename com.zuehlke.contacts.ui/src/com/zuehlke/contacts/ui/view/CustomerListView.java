@@ -3,6 +3,7 @@ package com.zuehlke.contacts.ui.view;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.eclipse.core.commands.common.CommandException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -20,13 +21,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 
 import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
 import com.zuehlke.contacts.ui.Activator;
-import com.zuehlke.contacts.ui.provider.ContactTreeLabelProvider;
 import com.zuehlke.contacts.ui.provider.ContactTreeContentProvider;
+import com.zuehlke.contacts.ui.provider.ContactTreeLabelProvider;
 
 public class CustomerListView extends ViewPart {
 
@@ -37,7 +39,8 @@ public class CustomerListView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
-		treeViewerContacts = new TreeViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
+		treeViewerContacts = new TreeViewer(container, SWT.BORDER
+				| SWT.FULL_SELECTION);
 		Tree tree = treeViewerContacts.getTree();
 		tree.setLinesVisible(false);
 
@@ -47,7 +50,15 @@ public class CustomerListView extends ViewPart {
 		treeViewerContacts.addDoubleClickListener(new IDoubleClickListener() {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-				// TODO open editor
+				IHandlerService handlerService = (IHandlerService) getViewSite()
+						.getService(IHandlerService.class);
+				try {
+					handlerService.executeCommand(
+							"com.zuehlke.contacts.ui.customeredit", null);
+				} catch (CommandException e) {
+					// TODO error handling
+					throw new RuntimeException("Unable to edit customer.", e);
+				}
 			}
 		});
 		// register menus & selection provider
@@ -103,6 +114,7 @@ public class CustomerListView extends ViewPart {
 				IWorkbenchActionConstants.MB_ADDITIONS));
 		Menu contextMenu = contextMenuManager
 				.createContextMenu(treeViewerContacts.getControl());
+
 		treeViewerContacts.getTree().setMenu(contextMenu);
 		getViewSite().registerContextMenu(contextMenuManager,
 				treeViewerContacts);
