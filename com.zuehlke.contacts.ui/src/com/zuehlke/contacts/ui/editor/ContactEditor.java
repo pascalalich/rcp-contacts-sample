@@ -5,12 +5,12 @@ import org.eclipse.ui.PartInitException;
 
 public class ContactEditor extends BasicFormEditor {
 
-	private CustomerFormPage page;
+	private ContactFormPage page;
 
 	@Override
 	protected void addPages() {
 		try {
-			page = new CustomerFormPage(this);
+			page = new ContactFormPage(this);
 			addPage(page);
 		} catch (PartInitException e) {
 			throw new RuntimeException(e);
