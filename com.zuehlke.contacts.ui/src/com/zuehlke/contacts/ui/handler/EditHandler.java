@@ -5,14 +5,17 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
+import com.zuehlke.contacts.ui.editor.ContactEditorInput;
 import com.zuehlke.contacts.ui.editor.CustomerEditorInput;
 
-public class CustomerEditHandler extends AbstractHandler {
+public class EditHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -23,27 +26,24 @@ public class CustomerEditHandler extends AbstractHandler {
 			if (selectedElement instanceof Customer) {
 				Customer customer = (Customer) selectedElement;
 				CustomerEditorInput input = new CustomerEditorInput(customer);
-				try {
-					PlatformUI
-							.getWorkbench()
-							.getActiveWorkbenchWindow()
-							.getActivePage()
-							.openEditor(input,
-									"com.zuehlke.contacts.ui.editor.customer");
-				} catch (PartInitException e) {
-					throw new ExecutionException(
-							"Could not open customer editor", e);
-				}
+				openEditor("com.zuehlke.contacts.ui.editor.customer", input);
 
-				// MessageDialog
-				// .openInformation(
-				// null,
-				// "Edit Customer",
-				// "Editing customer "
-				// + customer.getNumber()
-				// + " is impossible as the corresponding editor is missing!");
+			} else if (selectedElement instanceof Contact) {
+				Contact contact = (Contact) selectedElement;
+				ContactEditorInput input = new ContactEditorInput(contact);
+				openEditor("com.zuehlke.contacts.ui.editor.contact", input);
 			}
 		}
 		return null;
+	}
+
+	private void openEditor(String editorId, IEditorInput input)
+			throws ExecutionException {
+		try {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().openEditor(input, editorId);
+		} catch (PartInitException e) {
+			throw new ExecutionException("Could not open editor", e);
+		}
 	}
 }

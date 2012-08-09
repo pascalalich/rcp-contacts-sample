@@ -10,6 +10,7 @@ public class CustomerEditorInput extends BasicEditorInput<Customer> {
 
 	@Override
 	public String getName() {
+		// TODO error: editor doesn't show name anymore
 		Customer customer = getObject();
 		StringBuilder text = new StringBuilder();
 		if (customer.getId() != null) {

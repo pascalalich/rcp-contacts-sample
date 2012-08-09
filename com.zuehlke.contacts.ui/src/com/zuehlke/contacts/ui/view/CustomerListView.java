@@ -54,13 +54,14 @@ public class CustomerListView extends ViewPart {
 						.getService(IHandlerService.class);
 				try {
 					handlerService.executeCommand(
-							"com.zuehlke.contacts.ui.customeredit", null);
+							"com.zuehlke.contacts.ui.edit", null);
 				} catch (CommandException e) {
 					// TODO error handling
 					throw new RuntimeException("Unable to edit customer.", e);
 				}
 			}
 		});
+		// TODO button to create new customer/contact
 		// register menus & selection provider
 		registerContextMenu();
 		getViewSite().setSelectionProvider(treeViewerContacts);

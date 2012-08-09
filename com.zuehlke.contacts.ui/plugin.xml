@@ -39,24 +39,16 @@
             allPopups="false"
             locationURI="popup:com.zuehlke.contacts.ui.customerlist">
          <command
-               commandId="com.zuehlke.contacts.ui.customeredit"
+               commandId="com.zuehlke.contacts.ui.edit"
+               label="Edit"
                style="push">
             <visibleWhen
                   checkEnabled="false">
                <with
-                     variable="selection">
-                  <and>
-                     <iterate
-                           ifEmpty="false"
-                           operator="and">
-                        <instanceof
-                              value="com.zuehlke.contacts.service.dto.Customer">
-                        </instanceof>
-                     </iterate>
-                     <count
-                           value="1">
-                     </count>
-                  </and>
+                     variable="activeMenuSelection">
+                  <count
+                        value="1">
+                  </count>
                </with>
             </visibleWhen>
          </command>
@@ -65,15 +57,15 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="com.zuehlke.contacts.ui.customeredit"
-            name="Edit Customer">
+            id="com.zuehlke.contacts.ui.edit"
+            name="Edit Command">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.zuehlke.contacts.ui.handler.CustomerEditHandler"
-            commandId="com.zuehlke.contacts.ui.customeredit">
+            class="com.zuehlke.contacts.ui.handler.EditHandler"
+            commandId="com.zuehlke.contacts.ui.edit">
       </handler>
    </extension>
    <extension
