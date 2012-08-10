@@ -14,6 +14,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import com.zuehlke.contacts.service.ContactService;
+import com.zuehlke.contacts.service.dto.Address;
 import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.ui.Activator;
 
@@ -135,11 +136,6 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		return section;
 	}
 
-	/**
-	 * private Text streetText; private Text streetNumberText; private Text
-	 * postalCodeText; private Text cityText; private Text countryText;
-	 */
-
 	private void createAddressClient(FormToolkit toolkit, Section section) {
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
 		client.setLayout(new GridLayout(3, false));
@@ -166,19 +162,61 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 
 	private void initDefaults() {
 		Contact contact = getObject();
-		// nameText.setText(customer.getName());
-		// numberText.setText(customer.getNumber());
-		// Long mainContact = customer.getMainContact();
-		// if (mainContact != null) {
-		// mainContactText.setText(mainContact.toString());
-		// }
+		if (contact.getName() != null) {
+			nameText.setText(contact.getName());
+		}
+		if (contact.getGiven() != null) {
+			givenText.setText(contact.getGiven());
+		}
+		Long customerId = contact.getCustomer();
+		if (customerId != null) {
+			customerText.setText(customerId.toString());
+		}
+		if (contact.getEmail() != null) {
+			emailText.setText(contact.getEmail());
+		}
+		if (contact.getPhone() != null) {
+			phoneText.setText(contact.getPhone());
+		}
+		Address address = contact.getAddress();
+		if (address != null) {
+			if (address.getStreet() != null) {
+				streetText.setText(address.getStreet());
+			}
+			if (address.getStreetNumber() != null) {
+				streetNumberText.setText(address.getStreetNumber());
+			}
+			if (address.getPostalCode() != null) {
+				postalCodeText.setText(address.getPostalCode());
+			}
+			if (address.getCity() != null) {
+				cityText.setText(address.getCity());
+			}
+			if (address.getCountry() != null) {
+				countryText.setText(address.getCountry());
+			}
+		}
 	}
 
+	/**
+	 * private Text nameText; private Text givenText; private Text customerText;
+	 * 
+	 * private Text emailText; private Text phoneText;
+	 * 
+	 * private Text streetText; private Text streetNumberText; private Text
+	 * postalCodeText; private Text cityText; private Text countryText;
+	 */
 	private void initDirtyListeners() {
 		ModifyListener listener = getDirtyListener();
-		// nameText.addModifyListener(listener);
-		// numberText.addModifyListener(listener);
-		// mainContactText.addModifyListener(listener);
+		nameText.addModifyListener(listener);
+		givenText.addModifyListener(listener);
+		emailText.addModifyListener(listener);
+		phoneText.addModifyListener(listener);
+		streetText.addModifyListener(listener);
+		streetNumberText.addModifyListener(listener);
+		postalCodeText.addModifyListener(listener);
+		cityText.addModifyListener(listener);
+		countryText.addModifyListener(listener);
 	}
 
 	@Override
