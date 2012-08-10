@@ -68,8 +68,12 @@ public class CustomerFormPage extends BasicFormPage<Customer> {
 
 	private void initDefaults() {
 		Customer customer = getObject();
-		nameText.setText(customer.getName());
-		numberText.setText(customer.getNumber());
+		if (customer.getName() != null) {
+			nameText.setText(customer.getName());
+		}
+		if (customer.getNumber() != null) {
+			numberText.setText(customer.getNumber());
+		}
 		Long mainContact = customer.getMainContact();
 		if (mainContact != null) {
 			mainContactText.setText(mainContact.toString());
