@@ -27,7 +27,6 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 		return matches;
 	}
 
-
 	@Override
 	protected Contact copy(Contact source, Contact target) {
 		target.setId(source.getId());
@@ -41,10 +40,10 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 		} else {
 			Address address = new Address();
 			address.setCity(source.getAddress().getCity());
-			address.setCity(source.getAddress().getCountry());
-			address.setCity(source.getAddress().getPostalCode());
-			address.setCity(source.getAddress().getStreet());
-			address.setCity(source.getAddress().getStreetNumber());
+			address.setCountry(source.getAddress().getCountry());
+			address.setPostalCode(source.getAddress().getPostalCode());
+			address.setStreet(source.getAddress().getStreet());
+			address.setStreetNumber(source.getAddress().getStreetNumber());
 			target.setAddress(address);
 		}
 		return target;
@@ -59,6 +58,7 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 		contact1.setGiven("Pascal");
 		contact1.setName("Alich");
 		contact1.setEmail("alp@zuehlke.com");
+		contact1.setAddress(getZuehlkeAddress());
 		contacts.add(contact1);
 		Contact contact2 = new Contact();
 		contact2.setId(2l);
@@ -66,6 +66,7 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 		contact2.setGiven("Stefan");
 		contact2.setName("Reichert");
 		contact2.setEmail("srt@zuehlke.com");
+		contact2.setAddress(getZuehlkeAddress());
 		contacts.add(contact2);
 		Contact contact3 = new Contact();
 		contact3.setId(3l);
@@ -75,6 +76,16 @@ public class LocalContactService extends BasicLocalService<Contact> implements
 		contact3.setEmail("mm@post.de");
 		contacts.add(contact3);
 		return contacts;
+	}
+
+	private Address getZuehlkeAddress() {
+		Address address = new Address();
+		address.setStreet("Am Sandtorkai");
+		address.setStreetNumber("66");
+		address.setPostalCode("20457");
+		address.setCity("Hamburg");
+		address.setCountry("Deutschland");
+		return address;
 	}
 
 	@Override

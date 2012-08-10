@@ -22,8 +22,6 @@ import de.ikoffice.widgets.SplitButton;
 
 public class ContactFormPage extends BasicFormPage<Contact> {
 
-	// TODO how to display customer?
-
 	private Text nameText;
 	private Text givenText;
 	private Text customerText;
@@ -168,6 +166,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		if (contact.getGiven() != null) {
 			givenText.setText(contact.getGiven());
 		}
+		// TODO how to display customer?
 		Long customerId = contact.getCustomer();
 		if (customerId != null) {
 			customerText.setText(customerId.toString());
@@ -243,13 +242,19 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 
 	private void updateModel() {
 		Contact contact = getObject();
-		// contact.setName(nameText.getText());
-		// customer.setNumber(numberText.getText());
-		// Long mainContact = null;
-		// String mainContactId = mainContactText.getText().trim();
-		// if (!mainContactId.isEmpty()) {
-		// mainContact = Long.parseLong(mainContactId);
-		// }
-		// customer.setMainContact(mainContact);
+		contact.setName(nameText.getText());
+		contact.setGiven(givenText.getText());
+		contact.setEmail(emailText.getText());
+		contact.setPhone(phoneText.getText());
+		Address address = contact.getAddress();
+		if (address == null) {
+			address = new Address();
+			contact.setAddress(address);
+		}
+		address.setStreet(streetText.getText());
+		address.setStreetNumber(streetNumberText.getText());
+		address.setPostalCode(postalCodeText.getText());
+		address.setCity(cityText.getText());
+		address.setCountry(countryText.getText());
 	}
 }
