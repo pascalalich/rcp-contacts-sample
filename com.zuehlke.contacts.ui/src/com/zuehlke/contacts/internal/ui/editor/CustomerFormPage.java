@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.editor;
+package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
@@ -12,9 +12,9 @@ import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
+import com.zuehlke.contacts.internal.ui.Activator;
 import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
-import com.zuehlke.contacts.ui.Activator;
 
 public class CustomerFormPage extends BasicFormPage<Customer> {
 

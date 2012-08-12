@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Contacts UI
 Bundle-SymbolicName: com.zuehlke.contacts.ui; singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.zuehlke.contacts.ui.Activator
+Bundle-Activator: com.zuehlke.contacts.internal.ui.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -13,3 +13,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/SWTSplitButton-1.3.jar,
  .
+Export-Package: com.zuehlke.contacts.ui.addresscheck,
+ com.zuehlke.contacts.ui.intent

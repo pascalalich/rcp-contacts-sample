@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.editor;
+package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;

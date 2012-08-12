@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.view;
+package com.zuehlke.contacts.internal.ui.view;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -24,15 +24,15 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 
+import com.zuehlke.contacts.internal.ui.Activator;
+import com.zuehlke.contacts.internal.ui.provider.ContactTreeContentProvider;
+import com.zuehlke.contacts.internal.ui.provider.ContactTreeLabelProvider;
 import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
-import com.zuehlke.contacts.ui.Activator;
-import com.zuehlke.contacts.ui.provider.ContactTreeContentProvider;
-import com.zuehlke.contacts.ui.provider.ContactTreeLabelProvider;
 
 public class CustomerListView extends ViewPart {
 
-	public static final String ID = "com.zuehlke.contacts.ui.view.ContactListView"; //$NON-NLS-1$
+	public static final String ID = "com.zuehlke.contacts.internal.ui.view.ContactListView"; //$NON-NLS-1$
 	private TreeViewer treeViewerContacts;
 
 	@Override

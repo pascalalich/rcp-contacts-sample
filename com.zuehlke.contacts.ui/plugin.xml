@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="intent" name="Contacts Intent" schema="schema/intent.exsd"/>
 
    <extension
          point="org.eclipse.ui.views">
@@ -11,7 +12,7 @@
       <view
             allowMultiple="false"
             category="com.zuehlke.contacts.ui"
-            class="com.zuehlke.contacts.ui.view.CustomerListView"
+            class="com.zuehlke.contacts.internal.ui.view.CustomerListView"
             icon="icons/customers.gif"
             id="com.zuehlke.contacts.ui.customerlist"
             name="Customers"
@@ -64,20 +65,20 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.zuehlke.contacts.ui.handler.EditHandler"
+            class="com.zuehlke.contacts.internal.ui.handler.EditHandler"
             commandId="com.zuehlke.contacts.ui.edit">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="com.zuehlke.contacts.ui.editor.CustomerEditor"
+            class="com.zuehlke.contacts.internal.ui.editor.CustomerEditor"
             default="false"
             id="com.zuehlke.contacts.ui.editor.customer"
             name="Customer Editor">
       </editor>
       <editor
-            class="com.zuehlke.contacts.ui.editor.ContactEditor"
+            class="com.zuehlke.contacts.internal.ui.editor.ContactEditor"
             default="false"
             id="com.zuehlke.contacts.ui.editor.contact"
             name="Contact Editor">

@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.editor;
+package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
@@ -13,10 +13,10 @@ import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
+import com.zuehlke.contacts.internal.ui.Activator;
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.dto.Address;
 import com.zuehlke.contacts.service.dto.Contact;
-import com.zuehlke.contacts.ui.Activator;
 
 import de.ikoffice.widgets.SplitButton;
 

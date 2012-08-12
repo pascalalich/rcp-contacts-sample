@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.editor;
+package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;

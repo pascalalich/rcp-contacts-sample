@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.handler;
+package com.zuehlke.contacts.internal.ui.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -10,10 +10,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.zuehlke.contacts.internal.ui.editor.ContactEditorInput;
+import com.zuehlke.contacts.internal.ui.editor.CustomerEditorInput;
 import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
-import com.zuehlke.contacts.ui.editor.ContactEditorInput;
-import com.zuehlke.contacts.ui.editor.CustomerEditorInput;
 
 public class EditHandler extends AbstractHandler {
 
@@ -26,12 +26,12 @@ public class EditHandler extends AbstractHandler {
 			if (selectedElement instanceof Customer) {
 				Customer customer = (Customer) selectedElement;
 				CustomerEditorInput input = new CustomerEditorInput(customer);
-				openEditor("com.zuehlke.contacts.ui.editor.customer", input);
+				openEditor("com.zuehlke.contacts.internal.ui.editor.customer", input);
 
 			} else if (selectedElement instanceof Contact) {
 				Contact contact = (Contact) selectedElement;
 				ContactEditorInput input = new ContactEditorInput(contact);
-				openEditor("com.zuehlke.contacts.ui.editor.contact", input);
+				openEditor("com.zuehlke.contacts.internal.ui.editor.contact", input);
 			}
 		}
 		return null;

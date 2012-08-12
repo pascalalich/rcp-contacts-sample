@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui;
+package com.zuehlke.contacts.internal.ui;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,12 +1,12 @@
-package com.zuehlke.contacts.ui.provider;
+package com.zuehlke.contacts.internal.ui.provider;
 
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
+import com.zuehlke.contacts.internal.ui.Activator;
 import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
-import com.zuehlke.contacts.ui.Activator;
 
 public class ContactTreeLabelProvider extends LabelProvider {
 

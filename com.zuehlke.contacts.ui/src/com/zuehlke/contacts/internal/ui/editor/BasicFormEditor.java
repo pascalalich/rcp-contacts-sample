@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.editor;
+package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
@@ -6,7 +6,7 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
 
-import com.zuehlke.contacts.ui.Activator;
+import com.zuehlke.contacts.internal.ui.Activator;
 
 public abstract class BasicFormEditor extends FormEditor {
 
