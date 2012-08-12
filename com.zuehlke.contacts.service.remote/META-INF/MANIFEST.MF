@@ -1,13 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Local Service
-Bundle-SymbolicName: com.zuehlke.contacts.service.local
+Bundle-Name: Remote Service
+Bundle-SymbolicName: com.zuehlke.contacts.service.remote
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.zuehlke.contacts.service.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.core.runtime,
  com.zuehlke.contacts.service.api
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/xstream-1.4.3.jar,
- .

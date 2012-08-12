@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceException;
 import org.osgi.framework.ServiceReference;
 
 /**
@@ -64,16 +65,20 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public <T> T getService(Class<T> serviceClass) {
 		String serviceName = serviceClass.getName();
 		BundleContext bundleContext = getBundle().getBundleContext();
 		ServiceReference<T> serviceReference = null;
 		if (!serviceReferenceMap.containsKey(serviceName)) {
-			serviceReference = bundleContext.getServiceReference(serviceClass);
+			serviceReference = (ServiceReference<T>) bundleContext
+					.getServiceReference(serviceName);
 			if (serviceReference != null) {
 				serviceReferenceMap.put(serviceName, serviceReference);
+			} else {
+				throw new ServiceException("service is not available: "
+						+ serviceClass.getSimpleName());
 			}
 		} else {
 			serviceReference = (ServiceReference<T>) serviceReferenceMap

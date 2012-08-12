@@ -11,31 +11,25 @@ public class Activator extends Plugin {
 		return instance;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-	 * )
-	 */
-	public void start(BundleContext bundleContext) throws Exception {
-		super.start(bundleContext);
-		instance = this;
-		registerDummyServices();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		instance = null;
 		super.stop(bundleContext);
 	}
 
-	private void registerDummyServices() {
+	/** {@inheritDoc} */
+	@Override
+	public void start(BundleContext bundleContext) throws Exception {
+		super.start(bundleContext);
+		instance = this;
+		registerServices();
+	}
+
+	/**
+	 * Registers this bundles local service implementations.
+	 */
+	private void registerServices() {
 		getBundle().getBundleContext().registerService(CustomerService.class,
 				new LocalCustomerService(), null);
 		getBundle().getBundleContext().registerService(ContactService.class,
