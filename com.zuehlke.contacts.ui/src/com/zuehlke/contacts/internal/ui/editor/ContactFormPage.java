@@ -7,6 +7,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
@@ -35,6 +37,9 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 	private Text cityText;
 	private Text countryText;
 
+	private SplitButton emailIntentButton;
+	private SplitButton phoneIntentButton;
+
 	public ContactFormPage(FormEditor editor) {
 		super(editor, ContactFormPage.class.getName(), "Customer");
 	}
@@ -56,6 +61,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 
 		initDefaults();
 		initDirtyListeners();
+		initIntents();
 	}
 
 	private Section createGeneralSection(FormToolkit toolkit, Composite formBody) {
@@ -107,14 +113,14 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		emailLabel.setLayoutData(new GridData(70, SWT.DEFAULT));
 		emailText = toolkit.createText(client, "");
 		emailText.setLayoutData(new GridData(200, SWT.DEFAULT));
-		SplitButton emailIntentButton = new SplitButton(client, SWT.NONE);
+		emailIntentButton = new SplitButton(client, SWT.NONE);
 		emailIntentButton.setText("Action");
 		emailIntentButton.setLayoutData(new GridData(100, SWT.DEFAULT));
 		emailIntentButton.setEnabled(false);
 		toolkit.createLabel(client, "Phone");
 		phoneText = toolkit.createText(client, "");
 		phoneText.setLayoutData(new GridData(200, SWT.DEFAULT));
-		SplitButton phoneIntentButton = new SplitButton(client, SWT.NONE);
+		phoneIntentButton = new SplitButton(client, SWT.NONE);
 		phoneIntentButton.setText("Action");
 		phoneIntentButton.setLayoutData(new GridData(100, SWT.DEFAULT));
 		phoneIntentButton.setEnabled(false);
@@ -256,5 +262,17 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		address.setPostalCode(postalCodeText.getText());
 		address.setCity(cityText.getText());
 		address.setCountry(countryText.getText());
+	}
+
+	private void initIntents() {
+		Menu menu = phoneIntentButton.getMenu();
+
+		MenuItem skype = new MenuItem(menu, SWT.PUSH);
+		skype.setText("Call via Skype");
+
+		MenuItem sms = new MenuItem(menu, SWT.PUSH);
+		sms.setText("Send SMS");
+
+		phoneIntentButton.setEnabled(true);
 	}
 }
