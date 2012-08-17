@@ -1,12 +1,11 @@
 package com.zuehlke.contacts.internal.ui;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceException;
 import org.osgi.framework.ServiceReference;
 
 /**
@@ -20,7 +19,7 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
-	private Map<String, ServiceReference<?>> serviceReferenceMap = new ConcurrentHashMap<String, ServiceReference<?>>();
+	private Map<String, ServiceReference<?>> serviceReferenceMap = new HashMap<String, ServiceReference<?>>();
 
 	/**
 	 * The constructor
@@ -65,7 +64,18 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-	
+
+	/**
+	 * Retrieves a service from the OSGi Service Registry while caching
+	 * {@link ServiceReference}s. Please note that this implementation is not
+	 * thread-safe.
+	 * 
+	 * @param serviceClass
+	 *            the service class (mandatory)
+	 * @return the service implementation or <tt>null</tt> if no service has
+	 *         been registered for that class or it has already been
+	 *         unregistered
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getService(Class<T> serviceClass) {
 		String serviceName = serviceClass.getName();
@@ -76,15 +86,16 @@ public class Activator extends AbstractUIPlugin {
 					.getServiceReference(serviceName);
 			if (serviceReference != null) {
 				serviceReferenceMap.put(serviceName, serviceReference);
-			} else {
-				throw new ServiceException("service is not available: "
-						+ serviceClass.getSimpleName());
 			}
 		} else {
 			serviceReference = (ServiceReference<T>) serviceReferenceMap
 					.get(serviceName);
 		}
-		return bundleContext.getService(serviceReference);
+		T service = null;
+		if (serviceReference != null) {
+			service = bundleContext.getService(serviceReference);
+		}
+		return service;
 	}
 
 	/**
