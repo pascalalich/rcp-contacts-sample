@@ -26,12 +26,12 @@ public class EditHandler extends AbstractHandler {
 			if (selectedElement instanceof Customer) {
 				Customer customer = (Customer) selectedElement;
 				CustomerEditorInput input = new CustomerEditorInput(customer);
-				openEditor("com.zuehlke.contacts.internal.ui.editor.customer", input);
+				openEditor("com.zuehlke.contacts.ui.editor.customer", input);
 
 			} else if (selectedElement instanceof Contact) {
 				Contact contact = (Contact) selectedElement;
 				ContactEditorInput input = new ContactEditorInput(contact);
-				openEditor("com.zuehlke.contacts.internal.ui.editor.contact", input);
+				openEditor("com.zuehlke.contacts.ui.editor.contact", input);
 			}
 		}
 		return null;
