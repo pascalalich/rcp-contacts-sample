@@ -6,8 +6,14 @@
       <contactIntent
             class="com.zuehlke.contacts.ui.intent.skype.SkypeCallIntent"
             field="phone"
-            id="com.zuehlke.contacts.ui.intent.skype"
-            label="Skype">
+            id="com.zuehlke.contacts.ui.intent.skype.call"
+            label="Call via Skype">
+      </contactIntent>
+      <contactIntent
+            class="com.zuehlke.contacts.ui.intent.skype.SkypeSmsIntent"
+            field="phone"
+            id="com.zuehlke.contacts.ui.intent.skype.sms"
+            label="Send SMS">
       </contactIntent>
    </extension>
 

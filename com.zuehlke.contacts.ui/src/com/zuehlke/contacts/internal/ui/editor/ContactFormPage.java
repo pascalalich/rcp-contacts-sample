@@ -1,8 +1,14 @@
 package com.zuehlke.contacts.internal.ui.editor;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -19,6 +25,8 @@ import com.zuehlke.contacts.internal.ui.Activator;
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.dto.Address;
 import com.zuehlke.contacts.service.dto.Contact;
+import com.zuehlke.contacts.ui.intent.ContactIntentContext;
+import com.zuehlke.contacts.ui.intent.IContactIntent;
 
 import de.ikoffice.widgets.SplitButton;
 
@@ -265,14 +273,53 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 	}
 
 	private void initIntents() {
-		Menu menu = phoneIntentButton.getMenu();
 
-		MenuItem skype = new MenuItem(menu, SWT.PUSH);
-		skype.setText("Call via Skype");
+		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
+				.getExtensionPoint(Activator.PLUGIN_ID, "intent");
+		IConfigurationElement[] configurations = Platform
+				.getExtensionRegistry().getConfigurationElementsFor(
+						extensionPoint.getUniqueIdentifier());
+		for (final IConfigurationElement configuration : configurations) {
+			String field = configuration.getAttribute("field");
+			Menu menu = null;
+			if ("email".equals(field)) {
+				menu = emailIntentButton.getMenu();
+				emailIntentButton.setEnabled(true);
+			} else if ("phone".equals(field)) {
+				menu = phoneIntentButton.getMenu();
+				phoneIntentButton.setEnabled(true);
+			}
 
-		MenuItem sms = new MenuItem(menu, SWT.PUSH);
-		sms.setText("Send SMS");
-
-		phoneIntentButton.setEnabled(true);
+			final MenuItem menuItem = new MenuItem(menu, SWT.PUSH);
+			menuItem.setText(configuration.getAttribute("label"));
+			menuItem.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent event) {
+					IContactIntent intent;
+					try {
+						// TODO instantiated too often
+						intent = (IContactIntent) configuration
+								.createExecutableExtension("class");
+					} catch (CoreException e) {
+						throw new RuntimeException(e);
+					}
+					ContactIntentContext context = null;
+					String value = null;
+					Menu sourceMenu = ((MenuItem) event.getSource())
+							.getParent();
+					if (sourceMenu == emailIntentButton.getMenu()) {
+						context = ContactIntentContext.EMAIL;
+						value = emailText.getText();
+					} else if (sourceMenu == phoneIntentButton.getMenu()) {
+						context = ContactIntentContext.PHONE;
+						value = phoneText.getText();
+					}
+					if (context != null && value != null
+							&& !value.trim().isEmpty()) {
+						intent.call(context, value);
+					}
+				}
+			});
+		}
 	}
 }

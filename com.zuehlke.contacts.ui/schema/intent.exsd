@@ -73,7 +73,7 @@
                <restriction base="string">
                   <enumeration value="phone">
                   </enumeration>
-                  <enumeration value="eMail">
+                  <enumeration value="email">
                   </enumeration>
                </restriction>
             </simpleType>
