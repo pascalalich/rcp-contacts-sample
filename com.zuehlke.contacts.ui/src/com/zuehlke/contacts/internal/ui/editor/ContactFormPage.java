@@ -4,7 +4,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -22,6 +24,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
 import com.zuehlke.contacts.internal.ui.Activator;
+import com.zuehlke.contacts.internal.ui.ErrorDialogHelper;
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.dto.Address;
 import com.zuehlke.contacts.service.dto.Contact;
@@ -316,7 +319,21 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 					}
 					if (context != null && value != null
 							&& !value.trim().isEmpty()) {
-						intent.call(context, value);
+						try {
+							intent.call(context, value);
+						} catch (RuntimeException e) {
+							e.printStackTrace();
+							ErrorDialog
+									.openError(
+											null,
+											"Intent Error",
+											"Unable to perform the action",
+											ErrorDialogHelper
+													.getErrorMultiStatus(
+															e,
+															Activator.PLUGIN_ID,
+															IStatus.ERROR));
+						}
 					}
 				}
 			});
