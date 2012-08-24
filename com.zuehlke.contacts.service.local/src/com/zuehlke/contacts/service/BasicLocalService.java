@@ -26,7 +26,7 @@ public abstract class BasicLocalService<T extends BasicDto> {
 	public BasicLocalService() {
 		for (T t : restore()) {
 			data.put(getId(t), t);
-			sequence = Math.max(sequence, getId(t));
+			sequence = Math.max(sequence, getId(t) + 1);
 		}
 		// TODO remove when we have UI to manipulate and persist data
 		persist();

@@ -244,12 +244,13 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 			updateModel();
 			Contact contact = getObject();
 			if (contact.getId() == null) {
-				contactService.create(contact);
+				updateInput(new ContactEditorInput(
+						contactService.create(contact)));
+				initDefaults();
 			} else {
 				contactService.update(contact);
 			}
 			setDirty(false);
-			// TODO send event to refresh view
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Contact could not be saved: "

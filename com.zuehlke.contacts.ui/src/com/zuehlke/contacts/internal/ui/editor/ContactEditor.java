@@ -20,6 +20,7 @@ public class ContactEditor extends BasicFormEditor {
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		page.doSave(monitor);
+		super.doSave(monitor);
 	}
 
 	@Override

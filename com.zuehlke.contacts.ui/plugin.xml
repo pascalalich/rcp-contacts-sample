@@ -46,12 +46,58 @@
             <visibleWhen
                   checkEnabled="false">
                <with
-                     variable="activeMenuSelection">
+                     variable="selection">
                   <count
                         value="1">
                   </count>
                </with>
             </visibleWhen>
+         </command>
+         <command
+               commandId="com.zuehlke.contacts.ui.new"
+               label="New Contact"
+               style="push">
+            <parameter
+                  name="type"
+                  value="contact">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <instanceof
+                           value="com.zuehlke.contacts.service.dto.Customer">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:com.zuehlke.contacts.ui.customerlist"
+            sibling_order="&lt;separator&#x0D;&#x0A;               name=&quot;com.zuehlke.contacts.ui.separator1&quot;&gt;&#x0D;&#x0A;         &lt;/separator&gt;">
+         <command
+               commandId="com.zuehlke.contacts.ui.new"
+               icon="icons/customer.gif"
+               label="New Customer"
+               style="push">
+            <parameter
+                  name="type"
+                  value="customer">
+            </parameter>
+         </command>
+         <separator
+               name="separator"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.zuehlke.contacts.ui.refresh"
+               icon="icons/Refresh-icon.png"
+               style="push">
          </command>
       </menuContribution>
    </extension>
@@ -59,7 +105,20 @@
          point="org.eclipse.ui.commands">
       <command
             id="com.zuehlke.contacts.ui.edit"
-            name="Edit Command">
+            name="Edit">
+      </command>
+      <command
+            id="com.zuehlke.contacts.ui.new"
+            name="New">
+         <commandParameter
+               id="type"
+               name="Type"
+               optional="false">
+         </commandParameter>
+      </command>
+      <command
+            id="com.zuehlke.contacts.ui.refresh"
+            name="Refresh">
       </command>
    </extension>
    <extension
@@ -67,6 +126,14 @@
       <handler
             class="com.zuehlke.contacts.internal.ui.handler.EditHandler"
             commandId="com.zuehlke.contacts.ui.edit">
+      </handler>
+      <handler
+            class="com.zuehlke.contacts.internal.ui.handler.NewHandler"
+            commandId="com.zuehlke.contacts.ui.new">
+      </handler>
+      <handler
+            class="com.zuehlke.contacts.internal.ui.handler.RefreshHandler"
+            commandId="com.zuehlke.contacts.ui.refresh">
       </handler>
    </extension>
    <extension

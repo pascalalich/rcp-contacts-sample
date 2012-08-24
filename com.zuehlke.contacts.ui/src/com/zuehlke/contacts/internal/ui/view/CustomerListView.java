@@ -15,6 +15,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -45,7 +47,15 @@ public class CustomerListView extends ViewPart {
 		tree.setLinesVisible(false);
 
 		// set providers
-		treeViewerContacts.setLabelProvider(new ContactTreeLabelProvider());
+		final ContactTreeLabelProvider labelProvider = new ContactTreeLabelProvider();
+		treeViewerContacts.setLabelProvider(labelProvider);
+		treeViewerContacts.setSorter(new ViewerSorter() {
+			@Override
+			public int compare(Viewer viewer, Object e1, Object e2) {
+				return labelProvider.getText(e1).compareTo(
+						labelProvider.getText(e2));
+			}
+		});
 		treeViewerContacts.setContentProvider(new ContactTreeContentProvider());
 		treeViewerContacts.addDoubleClickListener(new IDoubleClickListener() {
 			@Override
@@ -67,6 +77,20 @@ public class CustomerListView extends ViewPart {
 		getViewSite().setSelectionProvider(treeViewerContacts);
 		// get initial data
 		refreshUI();
+	}
+
+	@Override
+	public Object getAdapter(Class adapter) {
+		if (adapter.equals(IRefreshable.class)) {
+			return new IRefreshable() {
+
+				@Override
+				public void refresh() {
+					refreshUI();
+				}
+			};
+		}
+		return super.getAdapter(adapter);
 	}
 
 	private void refreshUI() {

@@ -96,12 +96,13 @@ public class CustomerFormPage extends BasicFormPage<Customer> {
 			updateModel();
 			Customer customer = getObject();
 			if (customer.getId() == null) {
-				customerService.create(customer);
+				updateInput(new CustomerEditorInput(
+						customerService.create(customer)));
+				initDefaults();
 			} else {
 				customerService.update(customer);
 			}
 			setDirty(false);
-			// TODO send event to refresh view
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Customer could not be saved: "

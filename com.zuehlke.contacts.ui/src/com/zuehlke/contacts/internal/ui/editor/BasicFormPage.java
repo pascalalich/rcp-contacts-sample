@@ -2,6 +2,7 @@ package com.zuehlke.contacts.internal.ui.editor;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
 
@@ -17,6 +18,11 @@ public class BasicFormPage<T> extends FormPage {
 	@SuppressWarnings("unchecked")
 	protected final T getObject() {
 		return ((BasicEditorInput<T>) getEditorInput()).getObject();
+	}
+
+	public void updateInput(IEditorInput editorInput) {
+		BasicFormEditor editor = (BasicFormEditor) getEditor();
+		editor.updateInput(editorInput);
 	}
 
 	@Override
