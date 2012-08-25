@@ -31,10 +31,11 @@ public class Activator extends Plugin {
 	 */
 	private void registerServices() {
 		BundleContext bundleContext = getBundle().getBundleContext();
+		LocalContactService contactService = new LocalContactService();
 		bundleContext.registerService(CustomerService.class,
-				new LocalCustomerService(), null);
-		bundleContext.registerService(ContactService.class,
-				new LocalContactService(), null);
+				new LocalCustomerService(contactService), null);
+		bundleContext.registerService(ContactService.class, contactService,
+				null);
 	}
 
 }

@@ -3,10 +3,18 @@ package com.zuehlke.contacts.service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
 
 public class LocalCustomerService extends BasicLocalService<Customer> implements
 		CustomerService {
+
+	private LocalContactService contactService;
+
+	public LocalCustomerService(LocalContactService contactService) {
+		super();
+		this.contactService = contactService;
+	}
 
 	@Override
 	protected Customer copy(Customer source, Customer target) {
@@ -48,6 +56,15 @@ public class LocalCustomerService extends BasicLocalService<Customer> implements
 	@Override
 	protected Customer clone(Customer t) {
 		return copy(t, new Customer());
+	}
+
+	@Override
+	public void delete(Long id) {
+		Collection<Contact> contacts = contactService.findByCustomer(id);
+		for (Contact contact : contacts) {
+			contactService.delete(contact.getId());
+		}
+		super.delete(id);
 	}
 
 }

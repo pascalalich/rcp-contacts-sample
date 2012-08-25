@@ -62,7 +62,7 @@ public abstract class BasicLocalService<T extends BasicDto> {
 	}
 
 	public void delete(Long id) {
-		data.remove(findById(id));
+		data.remove(id);
 		persist();
 	}
 

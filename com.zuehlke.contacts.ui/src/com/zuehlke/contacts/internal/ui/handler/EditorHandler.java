@@ -4,9 +4,11 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -50,7 +52,7 @@ public abstract class EditorHandler extends AbstractHandler {
 		}
 	}
 
-	private void refreshViews() {
+	protected void refreshViews() {
 		IViewReference[] references = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getViewReferences();
 		for (IViewReference reference : references) {
@@ -62,6 +64,27 @@ public abstract class EditorHandler extends AbstractHandler {
 					adapter.refresh();
 				}
 			}
+		}
+	}
+
+	protected void closeEditor(Contact contact) throws ExecutionException {
+		ContactEditorInput input = new ContactEditorInput(contact);
+		closeEditor("com.zuehlke.contacts.ui.editor.contact", input);
+	}
+
+	protected void closeEditor(Customer customer) throws ExecutionException {
+		CustomerEditorInput input = new CustomerEditorInput(customer);
+		closeEditor("com.zuehlke.contacts.ui.editor.customer", input);
+	}
+
+	private void closeEditor(String editorId, IEditorInput input)
+			throws ExecutionException {
+		IEditorReference[] editors = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage()
+				.findEditors(input, editorId, IWorkbenchPage.MATCH_INPUT);
+		if (editors != null) {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().closeEditors(editors, false);
 		}
 	}
 }
