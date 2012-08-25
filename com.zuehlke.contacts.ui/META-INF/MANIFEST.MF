@@ -7,7 +7,7 @@ Bundle-Activator: com.zuehlke.contacts.internal.ui.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.zuehlke.contacts.service.api,
+ com.zuehlke.contacts.service.api;visibility:=reexport,
  org.eclipse.ui.forms
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

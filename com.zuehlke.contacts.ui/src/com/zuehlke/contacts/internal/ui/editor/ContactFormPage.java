@@ -1,5 +1,7 @@
 package com.zuehlke.contacts.internal.ui.editor;
 
+import java.util.Collection;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -22,12 +24,18 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
 
 import com.zuehlke.contacts.internal.ui.Activator;
 import com.zuehlke.contacts.internal.ui.ErrorDialogHelper;
 import com.zuehlke.contacts.service.ContactService;
 import com.zuehlke.contacts.service.dto.Address;
 import com.zuehlke.contacts.service.dto.Contact;
+import com.zuehlke.contacts.ui.addresscheck.AddressCheckResult;
+import com.zuehlke.contacts.ui.addresscheck.AddressCheckStatus;
+import com.zuehlke.contacts.ui.addresscheck.IAddressCheck;
 import com.zuehlke.contacts.ui.intent.ContactIntentContext;
 import com.zuehlke.contacts.ui.intent.IContactIntent;
 
@@ -142,7 +150,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		Section section = toolkit.createSection(formBody, Section.DESCRIPTION
 				| Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
 		section.setText("Address Information");
-		section.setDescription("This section contains address information");
+		section.setDescription("This section contains address information.\nPostal code / city combination is validated for Germany.");
 		section.setExpanded(true);
 		GridData gridData = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
 		gridData.verticalIndent = 20;
@@ -243,19 +251,50 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		if (contactService != null) {
 			updateModel();
 			Contact contact = getObject();
-			if (contact.getId() == null) {
-				updateInput(new ContactEditorInput(
-						contactService.create(contact)));
-				initDefaults();
-			} else {
-				contactService.update(contact);
+
+			if (checkAddress(contact.getAddress())) {
+				if (contact.getId() == null) {
+					contactService.create(contact);
+				} else {
+					contactService.update(contact);
+				}
+				setDirty(false);
+				// TODO send event to refresh view
 			}
-			setDirty(false);
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Contact could not be saved: "
 					+ getObject().getId());
 		}
+	}
+
+	/**
+	 * Checks the address via service extensions.
+	 * 
+	 * @param address
+	 *            the address to check
+	 * @return <tt>true</tt> if address is OK, <tt>false</tt> otherwise
+	 */
+	private boolean checkAddress(Address address) {
+		boolean ok = true;
+		try {
+			BundleContext bundleContext = Activator.getDefault().getBundle()
+					.getBundleContext();
+			Collection<ServiceReference<IAddressCheck>> references = bundleContext
+					.getServiceReferences(IAddressCheck.class, null);
+			for (ServiceReference<IAddressCheck> reference : references) {
+				IAddressCheck addressCheck = bundleContext
+						.getService(reference);
+				AddressCheckResult result = addressCheck.check(address);
+				if (result.getStatus() == AddressCheckStatus.ERROR) {
+					ok = false;
+					break;
+				}
+			}
+		} catch (InvalidSyntaxException e) {
+			throw new RuntimeException("Unable to check address.", e);
+		}
+		return ok;
 	}
 
 	private void updateModel() {
@@ -277,7 +316,6 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 	}
 
 	private void initIntents() {
-
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(Activator.PLUGIN_ID, "intent");
 		IConfigurationElement[] configurations = Platform
