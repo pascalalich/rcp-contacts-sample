@@ -251,15 +251,15 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		if (contactService != null) {
 			updateModel();
 			Contact contact = getObject();
-
 			if (checkAddress(contact.getAddress())) {
 				if (contact.getId() == null) {
-					contactService.create(contact);
+					setInput(new ContactEditorInput(
+							contactService.create(contact)));
+					firePropertyChange(PROP_INPUT);
+					initDefaults();
 				} else {
 					contactService.update(contact);
 				}
-				setDirty(false);
-				// TODO send event to refresh view
 			}
 		} else {
 			// TODO error handling
