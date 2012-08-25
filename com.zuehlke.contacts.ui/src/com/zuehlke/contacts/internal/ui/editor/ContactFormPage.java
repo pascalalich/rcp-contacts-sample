@@ -253,7 +253,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 			Contact contact = getObject();
 			if (checkAddress(contact.getAddress())) {
 				if (contact.getId() == null) {
-					setInput(new ContactEditorInput(
+					updateInput(new ContactEditorInput(
 							contactService.create(contact)));
 					firePropertyChange(PROP_INPUT);
 					initDefaults();
@@ -261,6 +261,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 					contactService.update(contact);
 				}
 			}
+			setDirty(false);
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Contact could not be saved: "

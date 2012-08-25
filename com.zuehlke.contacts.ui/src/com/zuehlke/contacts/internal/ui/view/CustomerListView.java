@@ -14,6 +14,7 @@ import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -79,6 +80,7 @@ public class CustomerListView extends ViewPart {
 		refreshUI();
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(IRefreshable.class)) {
@@ -122,7 +124,15 @@ public class CustomerListView extends ViewPart {
 
 								@Override
 								public void run() {
+									// save state
+									ISelection selection = treeViewerContacts
+											.getSelection();
+									Object[] expandedElements = treeViewerContacts
+											.getExpandedElements();
 									treeViewerContacts.setInput(newInput);
+									treeViewerContacts
+											.setExpandedElements(expandedElements);
+									treeViewerContacts.setSelection(selection);
 								}
 							});
 				}
