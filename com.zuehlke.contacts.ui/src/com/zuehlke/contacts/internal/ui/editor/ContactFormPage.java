@@ -150,7 +150,7 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 		Section section = toolkit.createSection(formBody, Section.DESCRIPTION
 				| Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
 		section.setText("Address Information");
-		section.setDescription("This section contains address information");
+		section.setDescription("This section contains address information.\nPostal code / city combination is validated for Germany.");
 		section.setExpanded(true);
 		GridData gridData = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
 		gridData.verticalIndent = 20;

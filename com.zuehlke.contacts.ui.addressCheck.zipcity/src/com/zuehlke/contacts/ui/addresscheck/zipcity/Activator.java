@@ -1,4 +1,4 @@
-package com.zuehlke.contacts.ui.addresscheck.maps;
+package com.zuehlke.contacts.ui.addresscheck.zipcity;
 
 import org.eclipse.core.internal.registry.osgi.OSGIUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -15,7 +15,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.zuehlke.contacts.ui.addressCheck.maps"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.zuehlke.contacts.ui.addresscheck.zipcity"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -61,7 +61,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Registers OSGi services. 
+	 * Registers OSGi services.
 	 * 
 	 * TODO duplicate code
 	 */
@@ -85,7 +85,7 @@ public class Activator extends AbstractUIPlugin {
 				bundleContext
 						.registerService(
 								com.zuehlke.contacts.ui.addresscheck.IAddressCheck.class,
-								new MapsAddressCheck(), null);
+								new ZipCityAddressCheck(), null);
 
 				return Status.OK_STATUS;
 			}
