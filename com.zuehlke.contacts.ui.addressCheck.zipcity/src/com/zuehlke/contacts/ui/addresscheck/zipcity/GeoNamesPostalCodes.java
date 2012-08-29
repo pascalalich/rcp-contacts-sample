@@ -32,7 +32,6 @@ public class GeoNamesPostalCodes {
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split("\\t");
 				PostalCodeCity pcc = new PostalCodeCity(parts[1], parts[2]);
-				System.out.println(pcc);
 				data.add(pcc);
 			}
 		} finally {
