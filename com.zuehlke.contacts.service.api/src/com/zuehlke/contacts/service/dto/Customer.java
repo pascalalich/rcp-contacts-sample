@@ -2,6 +2,8 @@ package com.zuehlke.contacts.service.dto;
 
 public class Customer extends BasicDto {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Technical id
 	 */

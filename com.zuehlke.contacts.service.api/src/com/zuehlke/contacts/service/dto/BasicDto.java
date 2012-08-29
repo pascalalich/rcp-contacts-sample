@@ -2,8 +2,11 @@ package com.zuehlke.contacts.service.dto;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 
-public abstract class BasicDto {
+public abstract class BasicDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(
 			this);
