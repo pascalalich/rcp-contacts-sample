@@ -260,8 +260,8 @@ public class ContactFormPage extends BasicFormPage<Contact> {
 				} else {
 					contactService.update(contact);
 				}
+				setDirty(false);
 			}
-			setDirty(false);
 		} else {
 			// TODO error handling
 			throw new RuntimeException("Contact could not be saved: "
