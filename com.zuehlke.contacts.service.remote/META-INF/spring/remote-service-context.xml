@@ -5,15 +5,31 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-	<bean id="customerServiceImpl" class="com.zuehlke.contacts.service.RemoteCustomerService" />
-
-	<bean id="contactServiceImpl" class="com.zuehlke.contacts.service.RemoteContactService" />
+	<bean id="customerServiceProxy"
+         class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+      <property name="serviceUrl">
+         <value>http://localhost:8888/services/customerService</value>
+      </property>
+      <property name="serviceInterface">
+         <value>com.zuehlke.contacts.service.CustomerService</value>
+      </property>
+   </bean>
+	
+	<bean id="contactServiceProxy"
+         class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+      <property name="serviceUrl">
+         <value>http://localhost:8888/services/contactService</value>
+      </property>
+      <property name="serviceInterface">
+         <value>com.zuehlke.contacts.service.ContactService</value>
+      </property>
+   </bean>
 
 	<osgi:service id="customerService"
-		interface="com.zuehlke.contacts.service.RemoteCustomerService" ref="customerServiceImpl" />
+		interface="com.zuehlke.contacts.service.CustomerService" ref="customerServiceProxy" />
 
 	<osgi:service id="contactService"
-		interface="com.zuehlke.contacts.service.RemoteContactService" ref="contactServiceImpl" />
+		interface="com.zuehlke.contacts.service.ContactService" ref="contactServiceProxy" />
 
 	<!-- THESE DECLARATIONS CAN BE USED TO ACCESS THE SERVICE IN OTHER BUNDLES -->
 	<!-- <osgi:reference id="customerService" interface="com.zuehlke.contacts.service.RemoteCustomerService" /> -->

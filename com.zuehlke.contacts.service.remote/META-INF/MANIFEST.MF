@@ -5,6 +5,13 @@ Bundle-SymbolicName: com.zuehlke.contacts.service.remote
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.core.runtime,
- com.zuehlke.contacts.service.api
+ com.zuehlke.contacts.service.api,
+ org.springframework.core,
+ org.springframework.beans,
+ org.springframework.expression,
+ org.springframework.web,
+ org.springframework.aop,
+ com.springsource.org.aopalliance,
+ org.springframework.context
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
