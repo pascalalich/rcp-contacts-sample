@@ -1,47 +1,9 @@
 package com.zuehlke.contacts.service.dto;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 public abstract class BasicDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(
-			this);
-
-	/**
-	 * Invoke after XML deserialization to initialize property change support.
-	 * TODO differently?
-	 */
-	public final void initChangeSupport() {
-		if (changeSupport == null) {
-			changeSupport = new PropertyChangeSupport(this);
-		}
-	}
-
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
-
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.removePropertyChangeListener(listener);
-	}
-
-	public void addPropertyChangeListener(String propertyName,
-			PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(propertyName, listener);
-	}
-
-	public void removePropertyChangeListener(String propertyName,
-			PropertyChangeListener listener) {
-		changeSupport.removePropertyChangeListener(propertyName, listener);
-	}
-
-	protected void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
-		changeSupport.firePropertyChange(propertyName, oldValue, newValue);
-	}
 
 }

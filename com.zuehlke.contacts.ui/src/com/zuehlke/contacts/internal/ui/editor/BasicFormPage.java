@@ -23,6 +23,7 @@ public class BasicFormPage<T> extends FormPage {
 	public void updateInput(IEditorInput editorInput) {
 		BasicFormEditor editor = (BasicFormEditor) getEditor();
 		editor.updateInput(editorInput);
+		setInput(editorInput);
 	}
 
 	@Override

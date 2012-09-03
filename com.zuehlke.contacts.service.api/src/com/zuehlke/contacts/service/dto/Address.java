@@ -5,6 +5,8 @@ package com.zuehlke.contacts.service.dto;
  */
 public class Address extends BasicDto {
 
+	private static final long serialVersionUID = 1L;
+
 	private String street;
 
 	private String streetNumber;
@@ -20,7 +22,7 @@ public class Address extends BasicDto {
 	}
 
 	public void setStreet(String street) {
-		firePropertyChange("street", this.street, this.street = street);
+		this.street = street;
 	}
 
 	public String getStreetNumber() {
@@ -28,8 +30,7 @@ public class Address extends BasicDto {
 	}
 
 	public void setStreetNumber(String streetNumber) {
-		firePropertyChange("streetNumber", this.streetNumber,
-				this.streetNumber = streetNumber);
+		this.streetNumber = streetNumber;
 	}
 
 	public String getPostalCode() {
@@ -37,8 +38,7 @@ public class Address extends BasicDto {
 	}
 
 	public void setPostalCode(String postalCode) {
-		firePropertyChange("postalCode", this.postalCode,
-				this.postalCode = postalCode);
+		this.postalCode = postalCode;
 	}
 
 	public String getCity() {
@@ -46,7 +46,7 @@ public class Address extends BasicDto {
 	}
 
 	public void setCity(String city) {
-		firePropertyChange("city", this.city, this.city = city);
+		this.city = city;
 
 	}
 
@@ -55,7 +55,7 @@ public class Address extends BasicDto {
 	}
 
 	public void setCountry(String country) {
-		firePropertyChange("country", this.country, this.country = country);
+		this.country = country;
 	}
 
 }

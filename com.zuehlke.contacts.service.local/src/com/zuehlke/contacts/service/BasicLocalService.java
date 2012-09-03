@@ -108,9 +108,6 @@ public abstract class BasicLocalService<T extends BasicDto> {
 		if (file.exists()) {
 			Collection<T> xmlData = (Collection<T>) new XStream(new DomDriver(
 					"UTF-8")).fromXML(file);
-			for (T xmlDataEntry : xmlData) {
-				xmlDataEntry.initChangeSupport();
-			}
 			data.addAll(xmlData);
 		} else {
 			data.addAll(getInitialData());

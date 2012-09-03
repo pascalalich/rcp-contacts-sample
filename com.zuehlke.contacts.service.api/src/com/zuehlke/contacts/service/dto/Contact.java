@@ -29,7 +29,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setId(Long id) {
-		firePropertyChange("id", this.id, this.id = id);
+		this.id = id;
 	}
 
 	public Long getCustomer() {
@@ -37,7 +37,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setCustomer(Long customer) {
-		firePropertyChange("customer", this.customer, this.customer = customer);
+		this.customer = customer;
 	}
 
 	public String getName() {
@@ -45,7 +45,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setName(String name) {
-		firePropertyChange("name", this.name, this.name = name);
+		this.name = name;
 	}
 
 	public String getGiven() {
@@ -53,7 +53,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setGiven(String given) {
-		firePropertyChange("given", this.given, this.given = given);
+		this.given = given;
 	}
 
 	public String getEmail() {
@@ -61,7 +61,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setEmail(String email) {
-		firePropertyChange("email", this.email, this.email = email);
+		this.email = email;
 	}
 
 	public String getPhone() {
@@ -69,7 +69,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setPhone(String phone) {
-		firePropertyChange("phone", this.phone, this.phone = phone);
+		this.phone = phone;
 	}
 
 	public Address getAddress() {
@@ -77,7 +77,7 @@ public class Contact extends BasicDto {
 	}
 
 	public void setAddress(Address address) {
-		firePropertyChange("address", this.address, this.address = address);
+		this.address = address;
 	}
 
 	@Override

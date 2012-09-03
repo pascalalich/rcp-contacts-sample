@@ -3,7 +3,7 @@ package com.zuehlke.contacts.service.dto;
 public class Customer extends BasicDto {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Technical id
 	 */
@@ -26,7 +26,7 @@ public class Customer extends BasicDto {
 	}
 
 	public void setId(Long id) {
-		firePropertyChange("id", this.id, this.id = id);
+		this.id = id;
 	}
 
 	public String getNumber() {
@@ -34,7 +34,7 @@ public class Customer extends BasicDto {
 	}
 
 	public void setNumber(String number) {
-		firePropertyChange("number", this.number, this.number = number);
+		this.number = number;
 	}
 
 	public String getName() {
@@ -42,7 +42,7 @@ public class Customer extends BasicDto {
 	}
 
 	public void setName(String name) {
-		firePropertyChange("name", this.name, this.name = name);
+		this.name = name;
 	}
 
 	public Long getMainContact() {
@@ -50,8 +50,7 @@ public class Customer extends BasicDto {
 	}
 
 	public void setMainContact(Long mainContact) {
-		firePropertyChange("mainContact", this.mainContact,
-				this.mainContact = mainContact);
+		this.mainContact = mainContact;
 	}
 
 	@Override
