@@ -8,7 +8,7 @@
 	<bean id="customerServiceProxy"
          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
       <property name="serviceUrl">
-         <value>http://localhost:8888/services/customerService</value>
+         <value>http://contactssamplegae.appspot.com/services/customerService</value>
       </property>
       <property name="serviceInterface">
          <value>com.zuehlke.contacts.service.CustomerService</value>
@@ -18,7 +18,7 @@
 	<bean id="contactServiceProxy"
          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
       <property name="serviceUrl">
-         <value>http://localhost:8888/services/contactService</value>
+         <value>http://contactssamplegae.appspot.com/services/contactService</value>
       </property>
       <property name="serviceInterface">
          <value>com.zuehlke.contacts.service.ContactService</value>
