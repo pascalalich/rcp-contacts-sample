@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.zuehlke.contacts4.core.handlers;
+package com.zuehlke.contacts4.ui.handlers;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -20,7 +20,7 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
-public class QuitHandler {
+public class ExitHandler {
 	@Execute
 	public void execute(IWorkbench workbench,
 			@Named(IServiceConstants.ACTIVE_SHELL) Shell shell)

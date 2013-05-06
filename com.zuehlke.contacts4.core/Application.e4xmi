@@ -10,24 +10,16 @@
         </children>
       </children>
     </children>
-    <mainMenu xmi:id="_2rFYyLYvEeKxufMc6Z6PWg" elementId="menu:org.eclipse.ui.main.menu">
-      <children xsi:type="menu:Menu" xmi:id="_2rFYybYvEeKxufMc6Z6PWg" label="File">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_2rF_wbYvEeKxufMc6Z6PWg" label="Quit" command="_2rFYurYvEeKxufMc6Z6PWg"/>
-      </children>
-    </mainMenu>
+    <mainMenu xmi:id="_2rFYyLYvEeKxufMc6Z6PWg" elementId="menu:org.eclipse.ui.main.menu"/>
     <trimBars xmi:id="_2rF_yLYvEeKxufMc6Z6PWg">
       <children xsi:type="menu:ToolBar" xmi:id="_2rF_ybYvEeKxufMc6Z6PWg" elementId="toolbar:org.eclipse.ui.main.toolbar"/>
     </trimBars>
   </children>
-  <handlers xmi:id="_2rFYu7YvEeKxufMc6Z6PWg" contributionURI="bundleclass://com.zuehlke.contacts4.core/com.zuehlke.contacts4.core.handlers.QuitHandler" command="_2rFYurYvEeKxufMc6Z6PWg"/>
-  <bindingTables xmi:id="_2rFYvLYvEeKxufMc6Z6PWg" bindingContext="_2rFYsbYvEeKxufMc6Z6PWg">
-    <bindings xmi:id="_2rFYvbYvEeKxufMc6Z6PWg" keySequence="M1+Q" command="_2rFYurYvEeKxufMc6Z6PWg"/>
-  </bindingTables>
+  <bindingTables xmi:id="_9ejNkLZQEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.core.bindingtable" bindingContext="_2rFYsbYvEeKxufMc6Z6PWg"/>
   <rootContext xmi:id="_2rFYsbYvEeKxufMc6Z6PWg" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_2rFYsrYvEeKxufMc6Z6PWg" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_2rFYs7YvEeKxufMc6Z6PWg" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <commands xmi:id="_2rFYurYvEeKxufMc6Z6PWg" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
   <addons xmi:id="_2rFYtLYvEeKxufMc6Z6PWg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_2rFYtbYvEeKxufMc6Z6PWg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_2rFYtrYvEeKxufMc6Z6PWg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

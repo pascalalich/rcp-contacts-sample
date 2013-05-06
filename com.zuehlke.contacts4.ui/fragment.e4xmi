@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_K88oALYzEeKxufMc6Z6PWg"/>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_K88oALYzEeKxufMc6Z6PWg">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5kny0LZJEeKxufMc6Z6PWg" featurename="commands" parentElementId="org.eclipse.e4.ide.application">
+    <elements xsi:type="commands:Command" xmi:id="_JlgcgLZKEeKxufMc6Z6PWg" elementId="org.eclipse.ui.file.exit" commandName="exitCommand"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_06IAULZOEeKxufMc6Z6PWg" featurename="handlers" parentElementId="org.eclipse.e4.ide.application">
+    <elements xsi:type="commands:Handler" xmi:id="_uY_ycLZKEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.quit.handler" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.ui.handlers.ExitHandler" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hGXCQLZLEeKxufMc6Z6PWg" featurename="children" parentElementId="menu:org.eclipse.ui.main.menu">
+    <elements xsi:type="menu:Menu" xmi:id="_klZ8ALZLEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.menu.file" label="File" mnemonics="F">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_nYlVoLZIEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.quit" label="Exit" mnemonics="x" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_prpq0LZQEeKxufMc6Z6PWg" featurename="bindings" parentElementId="com.zuehlke.contacts4.core.bindingtable">
+    <elements xsi:type="commands:KeyBinding" xmi:id="_X15UwLZREeKxufMc6Z6PWg" keySequence="M1+M2+X" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
+  </fragments>
+</fragment:ModelFragments>
