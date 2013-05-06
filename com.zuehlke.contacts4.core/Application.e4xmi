@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_2rFYsLYvEeKxufMc6Z6PWg" elementId="org.eclipse.e4.ide.application" bindingContexts="_2rFYsbYvEeKxufMc6Z6PWg">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_2rFYx7YvEeKxufMc6Z6PWg" label="RCP Contacts Sample (Eclipse 4)" width="500" height="400">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_2rFYsLYvEeKxufMc6Z6PWg" elementId="org.eclipse.e4.ide.application" bindingContexts="_2rFYsbYvEeKxufMc6Z6PWg">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_2rFYx7YvEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.mainwindow" label="RCP Contacts Sample (Eclipse 4)" width="500" height="400">
     <tags>shellMaximized</tags>
-    <children xsi:type="advanced:PerspectiveStack" xmi:id="_2rF_xLYvEeKxufMc6Z6PWg">
-      <children xsi:type="advanced:Perspective" xmi:id="_2rF_xbYvEeKxufMc6Z6PWg">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_2rF_xrYvEeKxufMc6Z6PWg" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_2rF_x7YvEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.left" containerData="20"/>
-          <children xsi:type="basic:PartStack" xmi:id="_f2Rd8LZMEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.right" containerData="80"/>
-        </children>
-      </children>
-    </children>
     <mainMenu xmi:id="_2rFYyLYvEeKxufMc6Z6PWg" elementId="menu:org.eclipse.ui.main.menu"/>
     <trimBars xmi:id="_2rF_yLYvEeKxufMc6Z6PWg">
       <children xsi:type="menu:ToolBar" xmi:id="_2rF_ybYvEeKxufMc6Z6PWg" elementId="toolbar:org.eclipse.ui.main.toolbar"/>

@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.zuehlke.contacts4.ui.handlers;
+package com.zuehlke.contacts4.internal.ui.handlers;
 
 import java.lang.reflect.InvocationTargetException;
 
