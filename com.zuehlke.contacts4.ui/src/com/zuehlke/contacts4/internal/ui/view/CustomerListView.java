@@ -6,17 +6,22 @@ import java.util.HashSet;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -38,7 +43,8 @@ import com.zuehlke.contacts4.internal.ui.events.IRefreshable;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeContentProvider;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeLabelProvider;
 
-public class CustomerListView implements IRefreshable {
+public class CustomerListView implements IRefreshable,
+		ISelectionChangedListener {
 
 	public static final String ID = "com.zuehlke.contacts.internal.ui.view.ContactListView"; //$NON-NLS-1$
 	private TreeViewer treeViewerContacts;
@@ -48,6 +54,12 @@ public class CustomerListView implements IRefreshable {
 
 	@Inject
 	private EMenuService menuService;
+
+	@Inject
+	private ECommandService commandService;
+
+	@Inject
+	private EHandlerService handlerService;
 
 	@Inject
 	private ESelectionService selectionService;
@@ -76,23 +88,15 @@ public class CustomerListView implements IRefreshable {
 		});
 		treeViewerContacts.setContentProvider(new ContactTreeContentProvider());
 		addSelectionListener();
-		// TODO open editor programmatically
-		// treeViewerContacts.addDoubleClickListener(new IDoubleClickListener()
-		// {
-		// @Override
-		// public void doubleClick(DoubleClickEvent event) {
-		// IHandlerService handlerService = (IHandlerService) getViewSite()
-		// .getService(IHandlerService.class);
-		// try {
-		// handlerService.executeCommand(
-		// "com.zuehlke.contacts4.ui.edit", null);
-		// } catch (CommandException e) {
-		// // TODO error handling
-		// throw new RuntimeException("Unable to edit customer.", e);
-		// }
-		// }
-		// });
-		// TODO button to create new customer/contact
+
+		treeViewerContacts.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				//selectionChanged(null);
+				executeEditCommand();
+			}
+
+		});
 		// register menus & selection provider
 		registerContextMenu();
 		// get initial data
@@ -100,17 +104,21 @@ public class CustomerListView implements IRefreshable {
 	}
 
 	private void addSelectionListener() {
-		treeViewerContacts
-				.addSelectionChangedListener(new ISelectionChangedListener() {
-					@Override
-					public void selectionChanged(SelectionChangedEvent event) {
-						IStructuredSelection selection = (IStructuredSelection) treeViewerContacts
-								.getSelection();
-						selectionService.setSelection(selection
-								.getFirstElement());
-					}
-				});
+		treeViewerContacts.addSelectionChangedListener(this);
 
+	}
+
+	@Override
+	public void selectionChanged(SelectionChangedEvent event) {
+		IStructuredSelection selection = (IStructuredSelection) treeViewerContacts
+				.getSelection();
+		selectionService.setSelection(selection.getFirstElement());
+	}
+
+	private void executeEditCommand() {
+		ParameterizedCommand editCommand = commandService.createCommand(
+				"com.zuehlke.contacts4.ui.edit", null);
+		handlerService.executeHandler(editCommand);
 	}
 
 	@Inject
