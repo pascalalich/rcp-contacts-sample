@@ -16,10 +16,14 @@
     <elements xsi:type="commands:Handler" xmi:id="_3RGIYLb2EeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.1" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.NewHandler" command="_OXd_kLZeEeKB-qcOHTgElQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_KLQtgLcREeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.2" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.DeleteHandler" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_LmzhoLcVEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.3" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.RefreshHandler" command="_QQQGILZeEeKB-qcOHTgElQ"/>
- 	<elements xsi:type="commands:Handler" xmi:id="_l1jnILcNEeKju6WG2MDJlQ" elementId="com.zuehlke.contacts4.ui.handler.4" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.SaveHandler" command="_TUKIgLcNEeKju6WG2MDJlQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_l1jnILcNEeKju6WG2MDJlQ" elementId="com.zuehlke.contacts4.ui.handler.4" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.SaveHandler" command="_TUKIgLcNEeKju6WG2MDJlQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hGXCQLZLEeKxufMc6Z6PWg" featurename="children" parentElementId="menu:org.eclipse.ui.main.menu">
     <elements xsi:type="menu:Menu" xmi:id="_klZ8ALZLEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.menu.file" label="File" mnemonics="F">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_3SV2ALcsEeKju6WG2MDJlQ" elementId="com.zuehlke.contacts4.ui.newcustomer" label="New Customer" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif" tooltip="New Customer" command="_OXd_kLZeEeKB-qcOHTgElQ">
+        <parameters xmi:id="_E2GV8LctEeKju6WG2MDJlQ" elementId="" name="type" value="customer"/>
+      </children>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_Hl1SoLctEeKju6WG2MDJlQ" elementId="com.zuehlke.contacts4.ui.menuseparator"/>
       <children xsi:type="menu:HandledMenuItem" xmi:id="_nYlVoLZIEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.quit" label="Exit" mnemonics="x" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
     </elements>
   </fragments>
@@ -32,11 +36,12 @@
       <children xsi:type="basic:PartStack" xmi:id="_9o4RcLZUEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.left" containerData="20">
         <children xsi:type="basic:Part" xmi:id="_vxEXoLZVEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.customerlist" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.view.CustomerListView" label="Customers" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/customers.gif">
           <menus xsi:type="menu:PopupMenu" xmi:id="_DxNoALZdEeKB-qcOHTgElQ" elementId="popup:com.zuehlke.contacts4.ui.customerlist">
-            <children xsi:type="menu:HandledMenuItem" xmi:id="_Hk7xQLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledmenuitem.0" label="Edit" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Edit-icon.png" command="_IVwUwLZeEeKB-qcOHTgElQ"/>
-            <children xsi:type="menu:HandledMenuItem" xmi:id="_RpdKMLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledmenuitem.1" label="New Contact" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/contact.gif" command="_OXd_kLZeEeKB-qcOHTgElQ">
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_Hk7xQLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.edit" label="Edit" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Edit-icon.png" command="_IVwUwLZeEeKB-qcOHTgElQ"/>
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_UTLlgLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.delete" label="Delete" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Delete-icon.png" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
+            <children xsi:type="menu:MenuSeparator" xmi:id="_K9DGELctEeKju6WG2MDJlQ" elementId="com.zuehlke.contacts4.ui.menuseparator"/>
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_RpdKMLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.newcontact" label="New Contact" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/contact.gif" command="_OXd_kLZeEeKB-qcOHTgElQ">
               <parameters xmi:id="_j16soLb3EeKB-qcOHTgElQ" elementId="" name="type" value="contact"/>
             </children>
-            <children xsi:type="menu:HandledMenuItem" xmi:id="_UTLlgLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledmenuitem.2" label="Delete" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Delete-icon.png" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
           </menus>
           <toolbar xmi:id="_UDVP0LZWEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.toolbar.0">
             <children xsi:type="menu:HandledToolItem" xmi:id="_dWTUILcTEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledtoolitem.0" label="New Customer" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif" tooltip="New Customer" command="_OXd_kLZeEeKB-qcOHTgElQ">
