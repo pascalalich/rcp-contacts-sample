@@ -12,7 +12,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.jface.viewers.ISelection;
@@ -31,10 +33,12 @@ import org.eclipse.swt.widgets.Tree;
 import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
 import com.zuehlke.contacts4.internal.ui.Activator;
+import com.zuehlke.contacts4.internal.ui.events.EventConstants;
+import com.zuehlke.contacts4.internal.ui.events.IRefreshable;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeContentProvider;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeLabelProvider;
 
-public class CustomerListView {
+public class CustomerListView implements IRefreshable {
 
 	public static final String ID = "com.zuehlke.contacts.internal.ui.view.ContactListView"; //$NON-NLS-1$
 	private TreeViewer treeViewerContacts;
@@ -47,6 +51,9 @@ public class CustomerListView {
 
 	@Inject
 	private ESelectionService selectionService;
+
+	@Inject
+	private CustomerService customerService;
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
@@ -88,9 +95,8 @@ public class CustomerListView {
 		// TODO button to create new customer/contact
 		// register menus & selection provider
 		registerContextMenu();
-		// getViewSite().setSelectionProvider(treeViewerContacts);
 		// get initial data
-		refreshUI();
+		refresh();
 	}
 
 	private void addSelectionListener() {
@@ -107,23 +113,13 @@ public class CustomerListView {
 
 	}
 
-	// TODO how to make it refreshable?
-	// @SuppressWarnings("rawtypes")
-	// @Override
-	// public Object getAdapter(Class adapter) {
-	// if (adapter.equals(IRefreshable.class)) {
-	// return new IRefreshable() {
-	//
-	// @Override
-	// public void refresh() {
-	// refreshUI();
-	// }
-	// };
-	// }
-	// return super.getAdapter(adapter);
-	// }
+	@Inject
+	@Optional
+	void refreshUI(@UIEventTopic(EventConstants.DATA_CHANGED) Object payload) {
+		refresh();
+	}
 
-	private void refreshUI() {
+	public void refresh() {
 		final Collection<Customer> newInput = new HashSet<Customer>();
 		// create a job to get the new data...
 		Job customerLoadJob = new Job("Load Customer") {
@@ -132,8 +128,6 @@ public class CustomerListView {
 			protected IStatus run(IProgressMonitor monitor) {
 				monitor.beginTask("Requesting all customers",
 						IProgressMonitor.UNKNOWN);
-				CustomerService customerService = Activator.getDefault()
-						.getService(CustomerService.class);
 				if (customerService != null) {
 					newInput.addAll(customerService.findAll());
 					return Status.OK_STATUS;
