@@ -14,6 +14,7 @@ import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import com.zuehlke.contacts.service.dto.Contact;
 import com.zuehlke.contacts.service.dto.Customer;
 
+@SuppressWarnings("restriction")
 public abstract class EditorHandler {
 
 	@Inject
@@ -31,25 +32,55 @@ public abstract class EditorHandler {
 
 	protected void openEditor(Contact contact) {
 		System.out.println("Open editor for contact " + contact.getName());
-		// TODO open editor the Eclipse 4 way
-		// ContactEditorInput input = new ContactEditorInput(contact);
-		// openEditor("com.zuehlke.contacts.ui.editor.contact", input);
+
+		String partId = String.format(
+				"com.zuehlke.contacts4.internal.ui.editors.ContactEditor#%d",
+				contact.getId());
+
+		MInputPart part = (MInputPart) partService.findPart(partId);
+		if (part == null) {
+			part = MBasicFactory.INSTANCE.createInputPart();
+			part.setElementId(partId);
+			part.setContributionURI("bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.editors.ContactEditor");
+			if (contact.getId() == null) {
+				part.setInputURI("resource:/contact#new");
+			} else {
+				part.setInputURI(String.format("resource:/contact#%d",
+						contact.getId()));
+			}
+			part.setIconURI("platform:/plugin/com.zuehlke.contacts4.ui/icons/contact.gif");
+			part.setCloseable(true);
+			MPartStack stack = (MPartStack) modelService.find(
+					"com.zuehlke.contacts4.right", application);
+			stack.getChildren().add(part);
+		}
+		partService.showPart(part, PartState.ACTIVATE);
 	}
 
 	protected void openEditor(Customer customer) {
 		System.out.println("Open editor for customer " + customer.getNumber());
-		MPartStack stack = (MPartStack) modelService.find(
-				"com.zuehlke.contacts4.right", application);
 
-		MInputPart part = MBasicFactory.INSTANCE.createInputPart();
-		// Pointing to the contributing class
-		part.setContributionURI("bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.editors.CustomerEditor");
-		part.setInputURI("resource:/customer#1");
-		part.setIconURI("platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif");
-		// part.setLabel(input.getName());
-		// part.setTooltip(input.getTooltip());
-		part.setCloseable(true);
-		stack.getChildren().add(part);
+		String partId = String.format(
+				"com.zuehlke.contacts4.internal.ui.editors.CustomerEditor#%d",
+				customer.getId());
+
+		MInputPart part = (MInputPart) partService.findPart(partId);
+		if (part == null) {
+			part = MBasicFactory.INSTANCE.createInputPart();
+			part.setElementId(partId);
+			part.setContributionURI("bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.editors.CustomerEditor");
+			if (customer.getId() == null) {
+				part.setInputURI("resource:/customer#new");
+			} else {
+				part.setInputURI(String.format("resource:/customer#%d",
+						customer.getId()));
+			}
+			part.setIconURI("platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif");
+			part.setCloseable(true);
+			MPartStack stack = (MPartStack) modelService.find(
+					"com.zuehlke.contacts4.right", application);
+			stack.getChildren().add(part);
+		}
 		partService.showPart(part, PartState.ACTIVATE);
 	}
 	//
@@ -91,12 +122,12 @@ public abstract class EditorHandler {
 	//
 	// protected void closeEditor(Contact contact) throws ExecutionException {
 	// ContactEditorInput input = new ContactEditorInput(contact);
-	// closeEditor("com.zuehlke.contacts.ui.editor.contact", input);
+	// closeEditor("com.zuehlke.contacts4.ui.editor.contact", input);
 	// }
 	//
 	// protected void closeEditor(Customer customer) throws ExecutionException {
 	// CustomerEditorInput input = new CustomerEditorInput(customer);
-	// closeEditor("com.zuehlke.contacts.ui.editor.customer", input);
+	// closeEditor("com.zuehlke.contacts4.ui.editor.customer", input);
 	// }
 	//
 	// private void closeEditor(String editorId, IEditorInput input)

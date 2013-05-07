@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Maps Address Check
-Bundle-SymbolicName: com.zuehlke.contacts.ui.addresscheck.maps
+Bundle-SymbolicName: com.zuehlke.contacts4.ui.addresscheck.maps
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.zuehlke.contacts.ui.addresscheck.maps.Activator
+Bundle-Activator: com.zuehlke.contacts4.ui.addresscheck.maps.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.zuehlke.contacts.ui,
+ com.zuehlke.contacts4.ui,
  org.eclipse.ui.browser
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

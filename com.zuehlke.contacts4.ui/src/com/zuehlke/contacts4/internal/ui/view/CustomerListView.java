@@ -78,7 +78,7 @@ public class CustomerListView {
 		// .getService(IHandlerService.class);
 		// try {
 		// handlerService.executeCommand(
-		// "com.zuehlke.contacts.ui.edit", null);
+		// "com.zuehlke.contacts4.ui.edit", null);
 		// } catch (CommandException e) {
 		// // TODO error handling
 		// throw new RuntimeException("Unable to edit customer.", e);
@@ -181,7 +181,7 @@ public class CustomerListView {
 		// treeViewerContacts);
 
 		menuService.registerContextMenu(treeViewerContacts.getTree(),
-				"popup:com.zuehlke.contacts.ui.customerlist");
+				"popup:com.zuehlke.contacts4.ui.customerlist");
 	}
 
 	@Focus

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+   <extension-point id="intent" name="Contacts Intent" schema="schema/intent.exsd"/>
+   
    <extension
          id="id1"
          point="org.eclipse.e4.workbench.model">

@@ -2,15 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="com.zuehlke.contacts.ui.intent">
+         point="com.zuehlke.contacts4.ui.intent">
       <contactIntent
-            class="com.zuehlke.contacts.ui.intent.skype.SkypeCallIntent"
+            class="com.zuehlke.contacts4.ui.intent.skype.SkypeCallIntent"
             field="phone"
             id="com.zuehlke.contacts.ui.intent.skype.call"
             label="Call via Skype">
       </contactIntent>
       <contactIntent
-            class="com.zuehlke.contacts.ui.intent.skype.SkypeSmsIntent"
+            class="com.zuehlke.contacts4.ui.intent.skype.SkypeSmsIntent"
             field="phone"
             id="com.zuehlke.contacts.ui.intent.skype.sms"
             label="Send SMS">

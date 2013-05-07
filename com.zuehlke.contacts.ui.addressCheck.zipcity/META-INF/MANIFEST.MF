@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Zip Code / City Validation
-Bundle-SymbolicName: com.zuehlke.contacts.ui.addresscheck.zipcity
+Bundle-SymbolicName: com.zuehlke.contacts4.ui.addresscheck.zipcity
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.zuehlke.contacts.ui.addresscheck.zipcity.Activator
+Bundle-Activator: com.zuehlke.contacts4.ui.addresscheck.zipcity.Activator
 Bundle-Vendor: Zühlke
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.zuehlke.contacts.ui
+ com.zuehlke.contacts4.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

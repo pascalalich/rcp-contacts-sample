@@ -2,15 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="com.zuehlke.contacts.ui.intent">
+         point="com.zuehlke.contacts4.ui.intent">
       <contactIntent
-            class="com.zuehlke.contacts.ui.intent.outlook.OutlookMailIntent"
+            class="com.zuehlke.contacts4.ui.intent.outlook.OutlookMailIntent"
             field="email"
             id="com.zuehlke.contacts.ui.intent.outlook.mail"
             label="New mail (OLE)">
       </contactIntent>
       <contactIntent
-            class="com.zuehlke.contacts.ui.intent.outlook.OutlookMailtoIntent"
+            class="com.zuehlke.contacts4.ui.intent.outlook.OutlookMailtoIntent"
             field="email"
             id="com.zuehlke.contacts.ui.intent.outlook.mailto"
             label="New mail (mailto)">
