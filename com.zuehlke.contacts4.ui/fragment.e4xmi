@@ -13,6 +13,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_uY_ycLZKEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.quit.handler" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.ExitHandler" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
     <elements xsi:type="commands:Handler" xmi:id="_4ZbVULbpEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.0" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.EditHandler" command="_IVwUwLZeEeKB-qcOHTgElQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_3RGIYLb2EeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.1" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.NewHandler" command="_OXd_kLZeEeKB-qcOHTgElQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_KLQtgLcREeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.2" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.DeleteHandler" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hGXCQLZLEeKxufMc6Z6PWg" featurename="children" parentElementId="menu:org.eclipse.ui.main.menu">
     <elements xsi:type="menu:Menu" xmi:id="_klZ8ALZLEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.menu.file" label="File" mnemonics="F">
