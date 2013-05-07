@@ -5,6 +5,7 @@ import java.net.URI;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.basic.MInputPart;
 import org.eclipse.swt.SWT;
@@ -67,6 +68,12 @@ public class CustomerEditor extends BasicFormEditor<Customer> {
 			throw new RuntimeException("Customer could not be saved: "
 					+ getObject().getId());
 		}
+	}
+
+	
+	@Focus
+	public void setFocus(){
+		nameText.setFocus();
 	}
 	
 	@Override

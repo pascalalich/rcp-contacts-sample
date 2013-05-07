@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.basic.MInputPart;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -108,6 +109,11 @@ public class ContactEditor extends BasicFormEditor<Contact> {
 			throw new RuntimeException("Contact could not be saved: "
 					+ getObject().getId());
 		}
+	}
+	
+	@Focus
+	public void setFocus(){
+		nameText.setFocus();
 	}
 
 	@Override
