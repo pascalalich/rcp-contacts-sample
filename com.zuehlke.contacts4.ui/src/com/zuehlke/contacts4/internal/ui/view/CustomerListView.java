@@ -34,10 +34,11 @@ import com.zuehlke.contacts.service.CustomerService;
 import com.zuehlke.contacts.service.dto.Customer;
 import com.zuehlke.contacts4.internal.ui.Activator;
 import com.zuehlke.contacts4.internal.ui.events.EventConstants;
+import com.zuehlke.contacts4.internal.ui.events.IRefreshable;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeContentProvider;
 import com.zuehlke.contacts4.internal.ui.provider.ContactTreeLabelProvider;
 
-public class CustomerListView {
+public class CustomerListView implements IRefreshable {
 
 	public static final String ID = "com.zuehlke.contacts.internal.ui.view.ContactListView"; //$NON-NLS-1$
 	private TreeViewer treeViewerContacts;
@@ -95,7 +96,7 @@ public class CustomerListView {
 		// register menus & selection provider
 		registerContextMenu();
 		// get initial data
-		refreshUI(null);
+		refresh();
 	}
 
 	private void addSelectionListener() {
@@ -115,6 +116,10 @@ public class CustomerListView {
 	@Inject
 	@Optional
 	void refreshUI(@UIEventTopic(EventConstants.DATA_CHANGED) Object payload) {
+		refresh();
+	}
+
+	public void refresh() {
 		final Collection<Customer> newInput = new HashSet<Customer>();
 		// create a job to get the new data...
 		Job customerLoadJob = new Job("Load Customer") {

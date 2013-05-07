@@ -14,6 +14,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_4ZbVULbpEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.0" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.EditHandler" command="_IVwUwLZeEeKB-qcOHTgElQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_3RGIYLb2EeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.1" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.NewHandler" command="_OXd_kLZeEeKB-qcOHTgElQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_KLQtgLcREeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.2" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.DeleteHandler" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_LmzhoLcVEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handler.3" contributionURI="bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.handlers.RefreshHandler" command="_QQQGILZeEeKB-qcOHTgElQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hGXCQLZLEeKxufMc6Z6PWg" featurename="children" parentElementId="menu:org.eclipse.ui.main.menu">
     <elements xsi:type="menu:Menu" xmi:id="_klZ8ALZLEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.menu.file" label="File" mnemonics="F">
@@ -38,6 +39,8 @@
             <children xsi:type="menu:HandledToolItem" xmi:id="_dWTUILcTEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledtoolitem.0" label="New Customer" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif" tooltip="New Customer" command="_OXd_kLZeEeKB-qcOHTgElQ">
               <parameters xmi:id="_oJS8oLcTEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.parameter.0" name="type" value="customer"/>
             </children>
+            <children xsi:type="menu:ToolBarSeparator" xmi:id="_S9rBgLcVEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.toolbarseparator.0"/>
+            <children xsi:type="menu:HandledToolItem" xmi:id="_UBqOELcVEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledtoolitem.1" label="Refresh" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Refresh-icon.png" tooltip="Refresh" command="_QQQGILZeEeKB-qcOHTgElQ"/>
           </toolbar>
         </children>
       </children>
