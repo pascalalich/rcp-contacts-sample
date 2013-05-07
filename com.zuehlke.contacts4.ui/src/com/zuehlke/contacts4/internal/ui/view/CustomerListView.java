@@ -13,9 +13,12 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.MenuManager;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -23,7 +26,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 
 import com.zuehlke.contacts.service.CustomerService;
@@ -39,6 +41,12 @@ public class CustomerListView {
 
 	@Inject
 	private Display display;
+
+	@Inject
+	private EMenuService menuService;
+
+	@Inject
+	private ESelectionService selectionService;
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
@@ -60,6 +68,7 @@ public class CustomerListView {
 			}
 		});
 		treeViewerContacts.setContentProvider(new ContactTreeContentProvider());
+		addSelectionListener();
 		// TODO open editor programmatically
 		// treeViewerContacts.addDoubleClickListener(new IDoubleClickListener()
 		// {
@@ -82,6 +91,20 @@ public class CustomerListView {
 		// getViewSite().setSelectionProvider(treeViewerContacts);
 		// get initial data
 		refreshUI();
+	}
+
+	private void addSelectionListener() {
+		treeViewerContacts
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+					@Override
+					public void selectionChanged(SelectionChangedEvent event) {
+						IStructuredSelection selection = (IStructuredSelection) treeViewerContacts
+								.getSelection();
+						selectionService.setSelection(selection
+								.getFirstElement());
+					}
+				});
+
 	}
 
 	// TODO how to make it refreshable?
@@ -148,15 +171,17 @@ public class CustomerListView {
 
 	// TODO register context menu the eclipse 4 way
 	private void registerContextMenu() {
-//		MenuManager contextMenuManager = new MenuManager();
-//		contextMenuManager.add(new GroupMarker(
-//				IWorkbenchActionConstants.MB_ADDITIONS));
-//		Menu contextMenu = contextMenuManager
-//				.createContextMenu(treeViewerContacts.getControl());
-//
-//		treeViewerContacts.getTree().setMenu(contextMenu);
-//		getViewSite().registerContextMenu(contextMenuManager,
-//				treeViewerContacts);
+		// MenuManager contextMenuManager = new MenuManager();
+		// contextMenuManager.add(new GroupMarker(
+		// IWorkbenchActionConstants.MB_ADDITIONS));
+		// Menu contextMenu = contextMenuManager
+		// .createContextMenu(treeViewerContacts.getControl());
+		// treeViewerContacts.getTree().setMenu(contextMenu);
+		// getViewSite().registerContextMenu(contextMenuManager,
+		// treeViewerContacts);
+
+		menuService.registerContextMenu(treeViewerContacts.getTree(),
+				"popup:com.zuehlke.contacts.ui.customerlist");
 	}
 
 	@Focus
