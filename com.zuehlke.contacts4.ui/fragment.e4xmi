@@ -11,6 +11,7 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hGXCQLZLEeKxufMc6Z6PWg" featurename="children" parentElementId="menu:org.eclipse.ui.main.menu">
     <elements xsi:type="menu:Menu" xmi:id="_klZ8ALZLEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.menu.file" label="File" mnemonics="F">
       <children xsi:type="menu:HandledMenuItem" xmi:id="_nYlVoLZIEeKxufMc6Z6PWg" elementId="com.zuehlke.contacts4.ui.quit" label="Exit" mnemonics="x" command="_JlgcgLZKEeKxufMc6Z6PWg"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_YKXpULboEeKggZfusIuTkg" elementId="com.zuehlke.contacts4.ui.edit" label="Edit" command="_LDXR4LZbEeKxufMc6Z6PWg"/>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_prpq0LZQEeKxufMc6Z6PWg" featurename="bindings" parentElementId="com.zuehlke.contacts4.core.bindingtable">
