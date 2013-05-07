@@ -1,5 +1,6 @@
 package com.zuehlke.contacts4.internal.ui.handlers;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.CanExecute;
@@ -10,8 +11,11 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 @SuppressWarnings("restriction")
-public class SaveHandler {
+public class SaveHandler extends EditorHandler {
 
+	@Inject
+	private EPartService partService;
+	
 	@CanExecute
 	boolean canExecute(
 			@Named(IServiceConstants.ACTIVE_PART) MDirtyable dirtyable) {
@@ -19,9 +23,9 @@ public class SaveHandler {
 	}
 
 	@Execute
-	void execute(EPartService partService,
-			@Named(IServiceConstants.ACTIVE_PART) MPart part) {
+	void execute(@Named(IServiceConstants.ACTIVE_PART) MPart part) {
 		partService.savePart(part, false);
+		sendDataChangedEvent();
 	}
 
 }
