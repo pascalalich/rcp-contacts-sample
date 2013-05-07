@@ -34,7 +34,11 @@
             </children>
             <children xsi:type="menu:HandledMenuItem" xmi:id="_UTLlgLZdEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledmenuitem.2" label="Delete" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/Delete-icon.png" command="_SQVHgLZeEeKB-qcOHTgElQ"/>
           </menus>
-          <toolbar xmi:id="_UDVP0LZWEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.toolbar.0"/>
+          <toolbar xmi:id="_UDVP0LZWEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.toolbar.0">
+            <children xsi:type="menu:HandledToolItem" xmi:id="_dWTUILcTEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.handledtoolitem.0" label="New Customer" iconURI="platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif" tooltip="New Customer" command="_OXd_kLZeEeKB-qcOHTgElQ">
+              <parameters xmi:id="_oJS8oLcTEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.ui.parameter.0" name="type" value="customer"/>
+            </children>
+          </toolbar>
         </children>
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_-Zq1MLZUEeKB-qcOHTgElQ" elementId="com.zuehlke.contacts4.right" containerData="80"/>
