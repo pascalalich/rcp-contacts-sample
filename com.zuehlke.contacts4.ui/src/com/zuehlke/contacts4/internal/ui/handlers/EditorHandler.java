@@ -2,6 +2,13 @@ package com.zuehlke.contacts4.internal.ui.handlers;
 
 import javax.inject.Inject;
 
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
+import org.eclipse.e4.ui.model.application.ui.basic.MInputPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 
 import com.zuehlke.contacts.service.dto.Contact;
@@ -10,6 +17,12 @@ import com.zuehlke.contacts.service.dto.Customer;
 public abstract class EditorHandler {
 
 	@Inject
+	private MApplication application;
+	@Inject
+	private EModelService modelService;
+	@Inject
+	private EPartService partService;
+	@Inject
 	private ESelectionService selectionService;
 
 	protected Object getSelection() {
@@ -17,17 +30,28 @@ public abstract class EditorHandler {
 	}
 
 	protected void openEditor(Contact contact) {
-		System.out.println("Open editor for contact "+contact.getName());
+		System.out.println("Open editor for contact " + contact.getName());
 		// TODO open editor the Eclipse 4 way
 		// ContactEditorInput input = new ContactEditorInput(contact);
 		// openEditor("com.zuehlke.contacts.ui.editor.contact", input);
 	}
 
 	protected void openEditor(Customer customer) {
-		System.out.println("Open editor for customer "+customer.getNumber());
-		// TODO open editor the Eclipse 4 way
-		// CustomerEditorInput input = new CustomerEditorInput(customer);
-		// openEditor("com.zuehlke.contacts.ui.editor.customer", input);
+		System.out.println("Open editor for customer " + customer.getNumber());
+		MPartStack stack = (MPartStack) modelService.find(
+				"com.zuehlke.contacts4.internal.ui.editors.customer",
+				application);
+
+		MInputPart part = MBasicFactory.INSTANCE.createInputPart();
+		// Pointing to the contributing class
+		part.setContributionURI("bundleclass://de.vogella.rcp.e4.todo/com.zuehlke.contacts4.internal.ui.editors.CustomerEditor");
+		// part.setInputURI(input.getInputURI());
+		part.setIconURI("platform:/plugin/de.vogella.rcp.e4.todo/icons/sample.gif");
+		// part.setLabel(input.getName());
+		// part.setTooltip(input.getTooltip());
+		part.setCloseable(true);
+		stack.getChildren().add(part);
+		partService.showPart(part, PartState.ACTIVATE);
 	}
 	//
 	// private void openEditor(String editorId, IEditorInput input)
