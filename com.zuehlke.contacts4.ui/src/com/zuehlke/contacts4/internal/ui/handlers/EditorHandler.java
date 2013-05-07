@@ -37,6 +37,7 @@ public abstract class EditorHandler {
 	protected void openEditor(Contact contact) {
 		System.out.println("Open editor for contact " + contact.getName());
 
+		// TODO better id for new objects
 		String partId = String.format(
 				"com.zuehlke.contacts4.internal.ui.editors.ContactEditor#%d",
 				contact.getId());
@@ -47,10 +48,13 @@ public abstract class EditorHandler {
 			part.setElementId(partId);
 			part.setContributionURI("bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.editors.ContactEditor");
 			if (contact.getId() == null) {
-				part.setInputURI("resource:/contact#new");
+				part.setInputURI(String.format(
+						"resource:/customer/%d/contacts/new",
+						contact.getCustomer()));
 			} else {
-				part.setInputURI(String.format("resource:/contact#%d",
-						contact.getId()));
+				part.setInputURI(String.format(
+						"resource:/customer/%d/contacts/%d",
+						contact.getCustomer(), contact.getId()));
 			}
 			part.setIconURI("platform:/plugin/com.zuehlke.contacts4.ui/icons/contact.gif");
 			part.setCloseable(true);
@@ -64,6 +68,7 @@ public abstract class EditorHandler {
 	protected void openEditor(Customer customer) {
 		System.out.println("Open editor for customer " + customer.getNumber());
 
+		// TODO better id for new objects
 		String partId = String.format(
 				"com.zuehlke.contacts4.internal.ui.editors.CustomerEditor#%d",
 				customer.getId());
@@ -74,9 +79,9 @@ public abstract class EditorHandler {
 			part.setElementId(partId);
 			part.setContributionURI("bundleclass://com.zuehlke.contacts4.ui/com.zuehlke.contacts4.internal.ui.editors.CustomerEditor");
 			if (customer.getId() == null) {
-				part.setInputURI("resource:/customer#new");
+				part.setInputURI("resource:/customer/new");
 			} else {
-				part.setInputURI(String.format("resource:/customer#%d",
+				part.setInputURI(String.format("resource:/customer/%d",
 						customer.getId()));
 			}
 			part.setIconURI("platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif");

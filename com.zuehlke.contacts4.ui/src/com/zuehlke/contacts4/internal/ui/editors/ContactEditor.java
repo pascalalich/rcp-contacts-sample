@@ -97,8 +97,13 @@ public class ContactEditor extends BasicFormEditor<Contact> {
 			Contact contact = getObject();
 			if (checkAddress(contact.getAddress())) {
 				if (contact.getId() == null) {
-					updateInput(new ContactEditorInput(
-							contactService.create(contact)));
+					Contact newContact = contactService.create(contact);
+					updateInput(new ContactEditorInput(newContact));
+					getInputPart()
+							.setElementId(
+									String.format(
+											"com.zuehlke.contacts4.internal.ui.editors.ContactEditor#%d",
+											newContact.getId()));
 				} else {
 					contactService.update(contact);
 					getInputPart().setLabel(getEditorInput().getName());
@@ -110,9 +115,9 @@ public class ContactEditor extends BasicFormEditor<Contact> {
 					+ getObject().getId());
 		}
 	}
-	
+
 	@Focus
-	public void setFocus(){
+	public void setFocus() {
 		nameText.setFocus();
 	}
 
@@ -182,10 +187,15 @@ public class ContactEditor extends BasicFormEditor<Contact> {
 
 	private Contact loadContact() {
 		URI inputURI = URI.create(getInputPart().getInputURI());
-		String customerId = inputURI.getFragment();
+		String[] pathParts = inputURI.getPath().split("/");
+		if (pathParts.length != 5) {
+			throw new IllegalArgumentException("Invalid input URI: " + inputURI);
+		}
+		String customerId = pathParts[4];
 		Contact contact;
 		if ("new".equals(customerId)) {
 			contact = new Contact();
+			contact.setCustomer(Long.parseLong(pathParts[2]));
 		} else {
 			contact = contactService.findById(Long.parseLong(customerId));
 		}

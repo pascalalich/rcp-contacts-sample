@@ -57,8 +57,13 @@ public class CustomerEditor extends BasicFormEditor<Customer> {
 			updateModel();
 			Customer customer = getObject();
 			if (customer.getId() == null) {
-				updateInput(new CustomerEditorInput(
-						customerService.create(customer)));
+				Customer newCustomer = customerService.create(customer);
+				updateInput(new CustomerEditorInput(newCustomer));
+				getInputPart()
+						.setElementId(
+								String.format(
+										"com.zuehlke.contacts4.internal.ui.editors.CustomerEditor#%d",
+										newCustomer.getId()));
 			} else {
 				customerService.update(customer);
 				getInputPart().setLabel(getEditorInput().getName());
@@ -70,12 +75,11 @@ public class CustomerEditor extends BasicFormEditor<Customer> {
 		}
 	}
 
-	
 	@Focus
-	public void setFocus(){
+	public void setFocus() {
 		nameText.setFocus();
 	}
-	
+
 	@Override
 	protected String getTitleImageURI() {
 		return "platform:/plugin/com.zuehlke.contacts4.ui/icons/customer.gif";
@@ -137,7 +141,11 @@ public class CustomerEditor extends BasicFormEditor<Customer> {
 
 	private Customer loadCustomer() {
 		URI inputURI = URI.create(getInputPart().getInputURI());
-		String customerId = inputURI.getFragment();
+		String[] pathParts = inputURI.getPath().split("/");
+		if (pathParts.length != 3) {
+			throw new IllegalArgumentException("Invalid input URI: " + inputURI);
+		}
+		String customerId = pathParts[2];
 		Customer customer;
 		if ("new".equals(customerId)) {
 			customer = new Customer();
