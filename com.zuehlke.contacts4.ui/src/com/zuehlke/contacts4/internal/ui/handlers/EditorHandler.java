@@ -94,14 +94,26 @@ public abstract class EditorHandler {
 
 	protected void closeEditor(Contact contact) {
 		System.out.println("Closing editor for contact " + contact.getName());
-		// ContactEditorInput input = new ContactEditorInput(contact);
-		// closeEditor("com.zuehlke.contacts.ui.editor.contact", input);
+		String partId = String.format(
+				"com.zuehlke.contacts4.internal.ui.editors.ContactEditor#%d",
+				contact.getId());
+
+		MInputPart part = (MInputPart) partService.findPart(partId);
+		if (part != null) {
+			partService.hidePart(part, true);
+		}
 	}
 
 	protected void closeEditor(Customer customer) {
 		System.out.println("Closing editor for customer "
 				+ customer.getNumber());
-		// CustomerEditorInput input = new CustomerEditorInput(customer);
-		// closeEditor("com.zuehlke.contacts.ui.editor.customer", input);
+		String partId = String.format(
+				"com.zuehlke.contacts4.internal.ui.editors.CustomerEditor#%d",
+				customer.getId());
+
+		MInputPart part = (MInputPart) partService.findPart(partId);
+		if (part != null) {
+			partService.hidePart(part, true);
+		}
 	}
 }
